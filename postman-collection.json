@@ -1,0 +1,350 @@
+{
+  "info": {
+    "name": "Swazei Multi-Tenant POS",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl",    "value": "http://localhost:3000" },
+    { "key": "token",      "value": "" },
+    { "key": "merchantId", "value": "" },
+    { "key": "storeId",    "value": "" },
+    { "key": "productId",  "value": "" },
+    { "key": "saleId",     "value": "" },
+    { "key": "userId",     "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register User (no token)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "if (json.id) pm.collectionVariables.set('userId', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@acme.com\",\n  \"password\": \"password123\",\n  \"merchantId\": \"{{merchantId}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login (Admin A)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('token', json.accessToken);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin.a@example.com\",\n  \"password\": \"password123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login (Staff A1)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('token', json.accessToken);",
+                  "pm.collectionVariables.set('storeId', json.user.storeId);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"staff.a1@example.com\",\n  \"password\": \"password123\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Merchants",
+      "item": [
+        {
+          "name": "Create Merchant (no token)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "if (json.id) pm.collectionVariables.set('merchantId', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/merchants",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Acme Store\",\n  \"email\": \"admin@acme.com\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List Merchants",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/merchants"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stores",
+      "item": [
+        {
+          "name": "List Stores",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "if (json.length > 0) pm.collectionVariables.set('storeId', json[0].id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/stores"
+          }
+        },
+        {
+          "name": "Create Store",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/stores",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"New Store\",\n  \"address\": \"99 Test Road\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List Products",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "if (json.length > 0) pm.collectionVariables.set('productId', json[0].id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/stores/{{storeId}}/products"
+          }
+        },
+        {
+          "name": "Create Product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('productId', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/stores/{{storeId}}/products",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Espresso\",\n  \"priceCents\": 350,\n  \"sku\": \"ESP-001\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/stores/{{storeId}}/products/{{productId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"priceCents\": 400\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "List Inventory",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/stores/{{storeId}}/inventory"
+          }
+        },
+        {
+          "name": "Adjust Stock",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/stores/{{storeId}}/inventory/products/{{productId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 50\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sales",
+      "item": [
+        {
+          "name": "Create Sale (Success)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "if (json.id) pm.collectionVariables.set('saleId', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/stores/{{storeId}}/sales",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    { \"productId\": \"{{productId}}\", \"quantity\": 2 }\n  ],\n  \"paymentMethod\": \"cash\",\n  \"idempotencyKey\": \"pos-terminal-1-{{$randomUUID}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Sale (Retry — same key, no duplicate)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/stores/{{storeId}}/sales",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    { \"productId\": \"{{productId}}\", \"quantity\": 2 }\n  ],\n  \"paymentMethod\": \"cash\",\n  \"idempotencyKey\": \"pos-terminal-FIXED-KEY-for-retry-test\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List Sales",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/stores/{{storeId}}/sales"
+          }
+        },
+        {
+          "name": "Get Sale",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/stores/{{storeId}}/sales/{{saleId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/users"
+          }
+        },
+        {
+          "name": "Create Staff User",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/users",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"New Staff\",\n  \"email\": \"new.staff@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"store_staff\",\n  \"storeId\": \"{{storeId}}\"\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
