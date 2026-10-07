@@ -83,9 +83,12 @@ import { PaymentsModule } from './modules/payments/payments.module';
               connectTimeout: 5000,
             },
           });
+          console.log(`✅ Redis connected: ${redisHost}:${redisPort}`);
           return { store, ttl };
-        } catch {
-          console.warn(`⚠️  Redis connection failed (${redisHost}:${redisPort}). Using memory cache fallback.`);
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          console.error(`❌ Redis connection failed (${redisHost}:${redisPort}): ${message}`);
+          console.warn('⚠️  Using memory cache fallback.');
           return { ttl };
         }
       },
@@ -104,3 +107,4 @@ import { PaymentsModule } from './modules/payments/payments.module';
   ],
 })
 export class AppModule {}
+
