@@ -23,10 +23,11 @@ export class InventoryController {
   @Put('products/:productId')
   @Roles(UserRole.MERCHANT_ADMIN)
   adjust(
+    @Param('storeId', ParseUUIDPipe) storeId: string,
     @Param('productId', ParseUUIDPipe) productId: string,
     @Body() dto: AdjustInventoryDto,
     @CurrentUser() user: User,
   ) {
-    return this.inventoryService.adjust(productId, dto, user);
+    return this.inventoryService.adjust(storeId, productId, dto, user);
   }
 }

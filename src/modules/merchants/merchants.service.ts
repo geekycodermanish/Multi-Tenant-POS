@@ -1,12 +1,9 @@
 import {
   Injectable,
   NotFoundException,
-  ConflictException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Op } from 'sequelize';
-import { Merchant } from '../../database/entities';
-import { CreateMerchantDto } from './dto/create-merchant.dto';
+import { Merchant, User } from '../../database/entities';
 
 @Injectable()
 export class MerchantsService {
@@ -14,23 +11,18 @@ export class MerchantsService {
     @InjectModel(Merchant) private merchantModel: typeof Merchant,
   ) {}
 
-  async create(dto: CreateMerchantDto): Promise<Merchant> {
-    const existing = await this.merchantModel.findOne({
-      where: {
-        [Op.or]: [{ name: dto.name }, { email: dto.email }],
-      },
+  async findAll(user: User): Promise<Merchant[]> {
+    return this.merchantModel.findAll({
+      where: { id: user.merchantId, isActive: true },
     });
-    if (existing) throw new ConflictException('Merchant name or email already taken');
-
-    return this.merchantModel.create(dto as any);
   }
 
-  async findAll(): Promise<Merchant[]> {
-    return this.merchantModel.findAll({ where: { isActive: true } });
-  }
+  async findOne(id: string, user: User): Promise<Merchant> {
+    if (id !== user.merchantId) throw new NotFoundException('Merchant not found');
 
-  async findOne(id: string): Promise<Merchant> {
-    const merchant = await this.merchantModel.findOne({ where: { id } });
+    const merchant = await this.merchantModel.findOne({
+      where: { id: user.merchantId },
+    });
     if (!merchant) throw new NotFoundException('Merchant not found');
     return merchant;
   }

@@ -25,10 +25,13 @@ export class ProductsService {
   }
 
   async create(storeId: string, dto: CreateProductDto, user: User): Promise<Product> {
-    const store = await this.storesService.findOne(storeId, user);
+    const store = await this.storesService.assertStoreAccess(user, storeId);
 
     const product = await this.productModel.create({
-      ...dto,
+      name: dto.name,
+      ...(dto.description !== undefined ? { description: dto.description } : {}),
+      ...(dto.sku !== undefined ? { sku: dto.sku } : {}),
+      priceCents: dto.priceCents,
       storeId: store.id,
     } as any);
 
@@ -44,7 +47,7 @@ export class ProductsService {
   }
 
   async findAll(storeId: string, user: User): Promise<Product[]> {
-    await this.storesService.findOne(storeId, user); // tenant check
+    await this.storesService.assertStoreAccess(user, storeId);
 
     const cached = await this.cacheManager.get<Product[]>(this.cacheKey(storeId));
     if (cached) return cached;
@@ -58,25 +61,35 @@ export class ProductsService {
     return products;
   }
 
-  async findOne(id: string, user: User): Promise<Product> {
+  async findOne(storeId: string, id: string, user: User): Promise<Product> {
+    await this.storesService.assertStoreAccess(user, storeId);
     const product = await this.productModel.findOne({
-      where: { id, isActive: true },
+      where: { id, storeId, isActive: true },
       include: [{ model: Inventory, as: 'inventory' }],
     });
     if (!product) throw new NotFoundException('Product not found');
-    await this.storesService.findOne(product.storeId, user); // tenant check
     return product;
   }
 
-  async update(id: string, dto: UpdateProductDto, user: User): Promise<Product> {
-    const product = await this.findOne(id, user);
+  async update(storeId: string, id: string, dto: UpdateProductDto, user: User): Promise<Product> {
+    await this.storesService.assertStoreAccess(user, storeId);
+    const product = await this.productModel.findOne({
+      where: { id, storeId, isActive: true },
+      include: [{ model: Inventory, as: 'inventory' }],
+    });
+    if (!product) throw new NotFoundException('Product not found');
     await product.update(dto as any);
     await this.cacheManager.del(this.cacheKey(product.storeId));
     return product;
   }
 
-  async remove(id: string, user: User): Promise<void> {
-    const product = await this.findOne(id, user);
+  async remove(storeId: string, id: string, user: User): Promise<void> {
+    await this.storesService.assertStoreAccess(user, storeId);
+    const product = await this.productModel.findOne({
+      where: { id, storeId, isActive: true },
+      include: [{ model: Inventory, as: 'inventory' }],
+    });
+    if (!product) throw new NotFoundException('Product not found');
     await product.update({ isActive: false });
     await this.cacheManager.del(this.cacheKey(product.storeId));
   }

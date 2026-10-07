@@ -1,30 +1,22 @@
-import { Controller, Get, Post, Body, Param, UseGuards, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards, ParseUUIDPipe } from '@nestjs/common';
 import { MerchantsService } from './merchants.service';
-import { CreateMerchantDto } from './dto/create-merchant.dto';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../../common/guards/roles.guard';
-import { UserRole } from '../../database/entities';
+import { CurrentUser } from '../../common/decorators/current-user.decorator';
+import { User } from '../../database/entities';
 
 @Controller('merchants')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class MerchantsController {
   constructor(private merchantsService: MerchantsService) {}
 
-  // Public endpoint — no token required for merchant registration
-  @Post()
-  create(@Body() dto: CreateMerchantDto) {
-    return this.merchantsService.create(dto);
-  }
-
   @Get()
-  // @UseGuards(JwtAuthGuard, RolesGuard)
-  findAll() {
-    return this.merchantsService.findAll();
+  findAll(@CurrentUser() user: User) {
+    return this.merchantsService.findAll(user);
   }
 
   @Get(':id')
-  // @UseGuards(JwtAuthGuard, RolesGuard)
-  findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.merchantsService.findOne(id);
+  findOne(@Param('id', ParseUUIDPipe) id: string, @CurrentUser() user: User) {
+    return this.merchantsService.findOne(id, user);
   }
 }

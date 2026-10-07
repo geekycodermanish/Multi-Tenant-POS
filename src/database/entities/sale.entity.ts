@@ -11,7 +11,6 @@ import {
   UpdatedAt,
   PrimaryKey,
   Default,
-  Unique,
   Index,
 } from 'sequelize-typescript';
 import { Store } from './store.entity';
@@ -26,7 +25,13 @@ export enum SaleStatus {
   CANCELLED = 'cancelled',
 }
 
-@Table({ tableName: 'sales', timestamps: true })
+@Table({
+  tableName: 'sales',
+  timestamps: true,
+  indexes: [
+    { unique: true, fields: ['storeId', 'idempotencyKey'], name: 'IDX_sales_storeId_idempotencyKey' },
+  ],
+})
 export class Sale extends Model {
   @PrimaryKey
   @Default(DataType.UUIDV4)
@@ -37,6 +42,9 @@ export class Sale extends Model {
   @ForeignKey(() => Store)
   @Column({ type: DataType.UUID, allowNull: false })
   storeId: string;
+
+  @Column({ type: DataType.STRING(32), allowNull: false })
+  billNumber: string;
 
   @BelongsTo(() => Store, { foreignKey: 'storeId', onDelete: 'CASCADE' })
   store: Store;
@@ -67,8 +75,6 @@ export class Sale extends Model {
   status: SaleStatus;
 
   // Idempotency key sent by POS terminal to prevent duplicate sales
-  @Unique
-  @Index
   @Column({ type: DataType.STRING, allowNull: false })
   idempotencyKey: string;
 

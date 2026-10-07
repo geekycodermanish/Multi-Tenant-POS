@@ -2,11 +2,13 @@ import {
   Injectable,
   NotFoundException,
   BadRequestException,
+  ConflictException,
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { InjectConnection } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize-typescript';
-import { Transaction } from 'sequelize';
+import { QueryTypes, Transaction } from 'sequelize';
 import {
   Sale, SaleItem, Payment, Inventory,
   Product, IdempotencyKey, User,
@@ -16,6 +18,8 @@ import { CreateSaleDto } from './dto/create-sale.dto';
 import { IPaymentProvider, PAYMENT_PROVIDER } from '../payments/payment-provider.interface';
 import { Inject } from '@nestjs/common';
 import { StoresService } from '../stores/stores.service';
+import { mapSaleResponse, SaleResponse } from './sale-response';
+import { createRequestHash } from './idempotency.util';
 
 @Injectable()
 export class SalesService {
@@ -32,118 +36,156 @@ export class SalesService {
   ) {}
 
   /**
-   * Creates a sale inside a serializable transaction.
-   *
-   * Concurrency strategy:
-   *   findAll({ lock: true, transaction }) issues SELECT ... FOR UPDATE on inventory
-   *   rows, serialising concurrent requests for the same product so the second waits
-   *   for the first to commit before reading the updated quantity.
-   *
-   * Idempotency strategy:
-   *   The POS terminal sends a unique idempotencyKey per sale attempt.
-   *   Before doing any work we check idempotency_keys with a UNIQUE constraint on
-   *   (key, storeId). If the row already exists we return the cached response.
+   * Claims the store-scoped idempotency key inside the transaction before locking stock.
+   * A committed claim points to the sale returned by subsequent retries.
    */
-  async createSale(storeId: string, dto: CreateSaleDto, user: User): Promise<Sale> {
-    // 1. Tenant check
-    const store = await this.storesService.findOne(storeId, user);
+  async createSale(
+    storeId: string,
+    dto: CreateSaleDto,
+    idempotencyKey: string | undefined,
+    user: User,
+  ): Promise<SaleResponse>;
+  async createSale(
+    storeId: string,
+    dto: CreateSaleDto & { idempotencyKey?: string },
+    user: User,
+  ): Promise<SaleResponse>;
+  async createSale(
+    storeId: string,
+    dto: CreateSaleDto,
+    idempotencyKeyOrUser: string | User | undefined,
+    userArgument?: User,
+  ): Promise<SaleResponse> {
+    const user = userArgument ?? idempotencyKeyOrUser as User;
+    const idempotencyKey = userArgument
+      ? idempotencyKeyOrUser as string | undefined
+      : (dto as CreateSaleDto & { idempotencyKey?: string }).idempotencyKey;
 
-    // 2. Idempotency check — return cached result if this key was already processed
-    const existingKey = await this.idempotencyModel.findOne({
-      where: { key: dto.idempotencyKey, storeId: store.id },
-    });
-    if (existingKey?.saleId) {
-      const cached = await this.saleModel.findOne({
-        where: { id: existingKey.saleId },
-        include: ['items', 'payment'],
-      });
-      if (cached) return cached;
+    // 1. Tenant check
+    const store = await this.storesService.assertStoreAccess(user, storeId);
+
+    if (
+      typeof idempotencyKey !== 'string' ||
+      idempotencyKey.length < 8 ||
+      idempotencyKey.length > 128 ||
+      !/^[A-Za-z0-9_-]+$/.test(idempotencyKey)
+    ) {
+      throw new BadRequestException(
+        'Idempotency-Key must be 8-128 characters using letters, numbers, underscores, or hyphens',
+      );
     }
 
-    // 3. Run everything in one SERIALIZABLE transaction
-    return this.sequelize.transaction(
-      { isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE },
-      async (t: Transaction) => {
-        const productIds = dto.items.map((i) => i.productId);
+    const requestHash = createRequestHash(store.id, dto);
+    const existingResponse = await this.findIdempotentResponse(
+      idempotencyKey,
+      store.id,
+      requestHash,
+    );
+    if (existingResponse) return existingResponse;
 
-        // ---- Lock inventory rows to prevent overselling (SELECT ... FOR UPDATE) ----
+    try {
+      return await this.runSaleTransaction(async (t, markPaymentAttempted) => {
+        await this.idempotencyModel.create({
+          key: idempotencyKey,
+          storeId: store.id,
+          requestHash,
+          saleId: null,
+        } as any, { transaction: t });
+
+        const quantities = new Map<string, number>();
+        for (const item of dto.items) {
+          quantities.set(item.productId, (quantities.get(item.productId) ?? 0) + item.quantity);
+        }
+        const productIds = [...quantities.keys()].sort();
+
+        for (const [productId, quantity] of quantities) {
+          if (!Number.isSafeInteger(quantity) || quantity < 1) {
+            throw new BadRequestException(`Invalid quantity for product ${productId}`);
+          }
+        }
+
         const inventories = await this.inventoryModel.findAll({
           where: { productId: productIds, storeId: store.id },
-          lock: true,           // SELECT ... FOR UPDATE
+          order: [['productId', 'ASC']],
+          lock: t.LOCK.UPDATE,
           transaction: t,
         });
-
         const invMap = new Map<string, Inventory>(
-          inventories.map((i) => [i.productId, i]),
+          inventories.map((inventory) => [inventory.productId, inventory]),
         );
 
-        // ---- Fetch products (server-side prices) ----
         const products = await this.productModel.findAll({
           where: { id: productIds, storeId: store.id, isActive: true },
           transaction: t,
         });
         const productMap = new Map<string, Product>(
-          products.map((p) => [p.id, p]),
+          products.map((product) => [product.id, product]),
         );
 
-        // ---- Validate each item ----
         let totalCents = 0;
         const saleItemsData: Array<{
           productId: string;
+          name: string;
           quantity: number;
           unitPriceCents: number;
           subtotalCents: number;
         }> = [];
 
-        for (const item of dto.items) {
-          const product = productMap.get(item.productId);
+        for (const productId of productIds) {
+          const product = productMap.get(productId);
           if (!product) {
-            throw new NotFoundException(`Product ${item.productId} not found in this store`);
+            throw new NotFoundException(`Product ${productId} not found in this store`);
           }
 
-          const inv = invMap.get(item.productId);
-          if (!inv) {
-            throw new BadRequestException(`No inventory record for product ${item.productId}`);
+          const inventory = invMap.get(productId);
+          if (!inventory) {
+            throw new NotFoundException(`Inventory record for product ${productId} not found`);
           }
 
-          if (inv.quantity < item.quantity) {
+          const quantity = quantities.get(productId)!;
+          if (Number(inventory.quantity) < quantity) {
             throw new BadRequestException(
-              `Insufficient stock for "${product.name}". Available: ${inv.quantity}, requested: ${item.quantity}`,
+              `Insufficient stock for "${product.name}". Available: ${inventory.quantity}, requested: ${quantity}`,
             );
           }
 
           const unitPriceCents = Number(product.priceCents);
-          const subtotalCents = unitPriceCents * item.quantity;
+          const subtotalCents = unitPriceCents * quantity;
           totalCents += subtotalCents;
-
           saleItemsData.push({
-            productId: item.productId,
-            quantity: item.quantity,
+            productId,
+            name: product.name,
+            quantity,
             unitPriceCents,
             subtotalCents,
           });
-
-          // Deduct inventory atomically inside the transaction
-          await inv.update({ quantity: inv.quantity - item.quantity }, { transaction: t });
+          await inventory.update(
+            { quantity: Number(inventory.quantity) - quantity },
+            { transaction: t },
+          );
         }
 
-        // ---- Create the Sale ----
+        const [billNumberRow] = await this.sequelize.query<{ billNumber: string }>(
+          `SELECT 'BILL-' || lpad(nextval('"sales_bill_seq"')::text, 8, '0') AS "billNumber"`,
+          { type: QueryTypes.SELECT, transaction: t },
+        );
+
         const sale = await this.saleModel.create({
           storeId: store.id,
           createdById: user.id,
+          billNumber: billNumberRow.billNumber,
           totalCents,
           status: SaleStatus.PENDING,
-          idempotencyKey: dto.idempotencyKey,
+          idempotencyKey,
           notes: dto.notes,
         } as any, { transaction: t });
 
-        // ---- Create SaleItems ----
         await this.saleItemModel.bulkCreate(
-          saleItemsData.map((si) => ({ ...si, saleId: sale.id })),
+          saleItemsData.map(({ name: _name, ...item }) => ({ ...item, saleId: sale.id })),
           { transaction: t },
         );
 
-        // ---- Process Payment ----
+        markPaymentAttempted();
         const paymentResult = await this.paymentProvider.charge({
           amountCents: totalCents,
           method: dto.paymentMethod,
@@ -160,33 +202,155 @@ export class SalesService {
         } as any, { transaction: t });
 
         if (!paymentResult.success) {
-          // Payment failed — re-throw so transaction rolls back, restoring inventory
           throw new BadRequestException(
             `Payment failed: ${paymentResult.failureReason ?? 'unknown reason'}`,
           );
         }
 
-        // ---- Mark sale as completed ----
         await sale.update({ status: SaleStatus.COMPLETED }, { transaction: t });
 
-        // ---- Store idempotency record ----
-        await this.idempotencyModel.create({
-          key: dto.idempotencyKey,
-          storeId: store.id,
-          saleId: sale.id,
-        } as any, { transaction: t });
+        await this.sequelize.query(
+          `UPDATE "idempotency_keys" SET "saleId" = :saleId WHERE "key" = :key AND "storeId" = :storeId`,
+          {
+            replacements: { saleId: sale.id, key: idempotencyKey, storeId: store.id },
+            transaction: t,
+          },
+        );
 
-        // Return the fully-loaded sale (outside the lock is fine — transaction already committed)
-        return this.saleModel.findOne({
-          where: { id: sale.id },
-          include: ['items', 'payment'],
-        });
-      },
+        return mapSaleResponse(
+          sale,
+          PaymentStatus.SUCCESS,
+          saleItemsData,
+        );
+      });
+    } catch (error) {
+      if (this.isInventoryQuantityCheckViolation(error)) {
+        throw new BadRequestException('Insufficient stock');
+      }
+      if (this.isIdempotencyUniqueViolation(error)) {
+        const winnerResponse = await this.findIdempotentResponse(
+          idempotencyKey,
+          store.id,
+          requestHash,
+        );
+        if (winnerResponse) return winnerResponse;
+        throw new ConflictException(
+          'A request with this Idempotency-Key is still in progress, retry shortly',
+        );
+      }
+      throw error;
+    }
+  }
+
+  private async findIdempotentResponse(
+    key: string,
+    storeId: string,
+    requestHash: string,
+  ): Promise<SaleResponse | undefined> {
+    const existingKey = await this.idempotencyModel.findOne({
+      where: { key, storeId },
+    });
+    if (!existingKey) return undefined;
+    if (
+      existingKey.requestHash !== undefined &&
+      existingKey.requestHash !== requestHash
+    ) {
+      throw new UnprocessableEntityException(
+        'Idempotency-Key was already used with a different request',
+      );
+    }
+    if (!existingKey.saleId) {
+      throw new ConflictException(
+        'A request with this Idempotency-Key is still in progress, retry shortly',
+      );
+    }
+
+    const cached = await this.saleModel.findOne({
+      where: { id: existingKey.saleId, storeId },
+      include: [
+        { model: SaleItem, as: 'items', include: [{ model: Product, as: 'product' }] },
+        'payment',
+      ],
+    });
+    if (!cached?.payment) {
+      throw new ConflictException(
+        'A request with this Idempotency-Key is still in progress, retry shortly',
+      );
+    }
+
+    return mapSaleResponse(
+      cached,
+      cached.payment.status,
+      cached.items.map((item) => ({
+        productId: item.productId,
+        name: item.product.name,
+        quantity: item.quantity,
+        unitPriceCents: item.unitPriceCents,
+        subtotalCents: item.subtotalCents,
+      })),
     );
   }
 
+  private async runSaleTransaction<T>(
+    work: (transaction: Transaction, markPaymentAttempted: () => void) => Promise<T>,
+  ): Promise<T> {
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      let paymentAttempted = false;
+      try {
+        return await this.sequelize.transaction(
+          { isolationLevel: Transaction.ISOLATION_LEVELS.READ_COMMITTED },
+          (transaction: Transaction) =>
+            work(transaction, () => {
+              paymentAttempted = true;
+            }),
+        );
+      } catch (error) {
+        const code = this.getPostgresErrorField(error, 'code');
+        const canRetry = (code === '40P01' || code === '40001') &&
+          !paymentAttempted &&
+          attempt < 2;
+        if (!canRetry) throw error;
+
+        await new Promise((resolve) =>
+          setTimeout(resolve, 10 + Math.floor(Math.random() * 41)),
+        );
+      }
+    }
+
+    throw new Error('Sale transaction retry limit exceeded');
+  }
+
+  private isInventoryQuantityCheckViolation(error: unknown): boolean {
+    return this.getPostgresErrorField(error, 'code') === '23514' &&
+      this.getPostgresErrorField(error, 'constraint') === 'CHK_inventory_qty';
+  }
+
+  private isIdempotencyUniqueViolation(error: unknown): boolean {
+    return this.getPostgresErrorField(error, 'code') === '23505' &&
+      this.getPostgresErrorField(error, 'constraint') === 'UQ_idempotency_key_store';
+  }
+
+  private getPostgresErrorField(
+    error: unknown,
+    field: 'code' | 'constraint',
+  ): string | undefined {
+    if (!error || typeof error !== 'object') return undefined;
+    const candidates = [
+      error as Record<string, unknown>,
+      (error as Record<string, unknown>).original,
+      (error as Record<string, unknown>).parent,
+    ];
+    for (const candidate of candidates) {
+      if (candidate && typeof candidate === 'object') {
+        const value = (candidate as Record<string, unknown>)[field];
+        if (typeof value === 'string') return value;
+      }
+    }
+    return undefined;
+  }
+
   async findAll(storeId: string, user: User): Promise<Sale[]> {
-    await this.storesService.findOne(storeId, user);
+    await this.storesService.assertStoreAccess(user, storeId);
     return this.saleModel.findAll({
       where: { storeId },
       include: ['items', 'payment'],
@@ -194,15 +358,13 @@ export class SalesService {
     });
   }
 
-  async findOne(id: string, user: User): Promise<Sale> {
+  async findOne(storeId: string, id: string, user: User): Promise<Sale> {
+    await this.storesService.assertStoreAccess(user, storeId);
     const sale = await this.saleModel.findOne({
-      where: { id },
+      where: { id, storeId },
       include: ['items', 'payment', 'store'],
     });
     if (!sale) throw new NotFoundException('Sale not found');
-
-    // Tenant isolation
-    await this.storesService.findOne(sale.storeId, user);
     return sale;
   }
 }

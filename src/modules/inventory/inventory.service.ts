@@ -16,22 +16,20 @@ export class InventoryService {
   ) {}
 
   async findByStore(storeId: string, user: User): Promise<Inventory[]> {
-    await this.storesService.findOne(storeId, user);
+    await this.storesService.assertStoreAccess(user, storeId);
     return this.inventoryModel.findAll({
       where: { storeId },
       include: [{ model: Product, as: 'product' }],
     });
   }
 
-  async adjust(productId: string, dto: AdjustInventoryDto, user: User): Promise<Inventory> {
+  async adjust(storeId: string, productId: string, dto: AdjustInventoryDto, user: User): Promise<Inventory> {
+    await this.storesService.assertStoreAccess(user, storeId);
     const inv = await this.inventoryModel.findOne({
-      where: { productId },
+      where: { storeId, productId },
       include: ['store'],
     });
     if (!inv) throw new NotFoundException('Inventory record not found');
-
-    // tenant isolation — ensure the store belongs to the user's merchant
-    await this.storesService.findOne(inv.storeId, user);
 
     await inv.update({ quantity: dto.quantity });
 

@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Param, UseGuards, ParseUUIDPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  UseGuards,
+  ParseUUIDPipe,
+  HttpCode,
+  HttpStatus,
+  Headers,
+} from '@nestjs/common';
 import { SalesService } from './sales.service';
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
@@ -11,12 +22,14 @@ export class SalesController {
   constructor(private salesService: SalesService) {}
 
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   createSale(
     @Param('storeId', ParseUUIDPipe) storeId: string,
     @Body() dto: CreateSaleDto,
+    @Headers('idempotency-key') idempotencyKey: string | undefined,
     @CurrentUser() user: User,
   ) {
-    return this.salesService.createSale(storeId, dto, user);
+    return this.salesService.createSale(storeId, dto, idempotencyKey, user);
   }
 
   @Get()
@@ -29,9 +42,10 @@ export class SalesController {
 
   @Get(':id')
   findOne(
+    @Param('storeId', ParseUUIDPipe) storeId: string,
     @Param('id', ParseUUIDPipe) id: string,
     @CurrentUser() user: User,
   ) {
-    return this.salesService.findOne(id, user);
+    return this.salesService.findOne(storeId, id, user);
   }
 }

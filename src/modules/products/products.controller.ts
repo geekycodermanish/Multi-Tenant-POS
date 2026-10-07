@@ -36,28 +36,31 @@ export class ProductsController {
 
   @Get(':id')
   findOne(
+    @Param('storeId', ParseUUIDPipe) storeId: string,
     @Param('id', ParseUUIDPipe) id: string,
     @CurrentUser() user: User,
   ) {
-    return this.productsService.findOne(id, user);
+    return this.productsService.findOne(storeId, id, user);
   }
 
   @Put(':id')
   @Roles(UserRole.MERCHANT_ADMIN)
   update(
+    @Param('storeId', ParseUUIDPipe) storeId: string,
     @Param('id', ParseUUIDPipe) id: string,
     @Body() dto: UpdateProductDto,
     @CurrentUser() user: User,
   ) {
-    return this.productsService.update(id, dto, user);
+    return this.productsService.update(storeId, id, dto, user);
   }
 
   @Delete(':id')
   @Roles(UserRole.MERCHANT_ADMIN)
   remove(
+    @Param('storeId', ParseUUIDPipe) storeId: string,
     @Param('id', ParseUUIDPipe) id: string,
     @CurrentUser() user: User,
   ) {
-    return this.productsService.remove(id, user);
+    return this.productsService.remove(storeId, id, user);
   }
 }

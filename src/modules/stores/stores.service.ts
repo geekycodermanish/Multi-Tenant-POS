@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Store, User } from '../../database/entities';
+import { Store, User, UserRole } from '../../database/entities';
 import { CreateStoreDto } from './dto/create-store.dto';
 
 @Injectable()
@@ -18,21 +18,27 @@ export class StoresService {
 
   async findAll(user: User): Promise<Store[]> {
     return this.storeModel.findAll({
-      where: { merchantId: user.merchantId, isActive: true },
+      where: {
+        merchantId: user.merchantId,
+        ...(user.role === UserRole.MERCHANT_ADMIN ? {} : { id: user.storeId ?? null }),
+        isActive: true,
+      },
     });
   }
 
   async findOne(id: string, user: User): Promise<Store> {
-    const store = await this.storeModel.findOne({ where: { id } });
-    if (!store) throw new NotFoundException('Store not found');
-    this.assertSameMerchant(store, user);
-    return store;
+    return this.assertStoreAccess(user, id);
   }
 
-  /** Shared helper — throws if the store belongs to a different merchant */
-  assertSameMerchant(store: Store, user: User): void {
-    if (store.merchantId !== user.merchantId) {
-      throw new ForbiddenException('Access denied to this store');
+  async assertStoreAccess(user: User, storeId: string): Promise<Store> {
+    const store = await this.storeModel.findOne({ where: { id: storeId } });
+    if (
+      !store ||
+      store.merchantId !== user.merchantId ||
+      (user.role !== UserRole.MERCHANT_ADMIN && user.storeId !== storeId)
+    ) {
+      throw new NotFoundException('Store not found');
     }
+    return store;
   }
 }

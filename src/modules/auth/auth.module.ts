@@ -6,12 +6,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './jwt.strategy';
-import { User, Merchant } from '../../database/entities';
+import { User } from '../../database/entities';
 
 @Module({
   imports: [
     PassportModule,
-    SequelizeModule.forFeature([User, Merchant]),
+    SequelizeModule.forFeature([User]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
