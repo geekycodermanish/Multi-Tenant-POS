@@ -4,6 +4,7 @@ import {
   BadRequestException,
   ConflictException,
   UnprocessableEntityException,
+  Optional,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { InjectConnection } from '@nestjs/sequelize';
@@ -20,6 +21,7 @@ import { Inject } from '@nestjs/common';
 import { StoresService } from '../stores/stores.service';
 import { mapSaleResponse, SaleResponse } from './sale-response';
 import { createRequestHash } from './idempotency.util';
+import { ProductCacheService } from '../products/product-cache.service';
 
 @Injectable()
 export class SalesService {
@@ -33,6 +35,7 @@ export class SalesService {
     @InjectConnection() private sequelize: Sequelize,
     @Inject(PAYMENT_PROVIDER) private paymentProvider: IPaymentProvider,
     private storesService: StoresService,
+    @Optional() private productCache?: ProductCacheService,
   ) {}
 
   /**
@@ -84,7 +87,7 @@ export class SalesService {
     if (existingResponse) return existingResponse;
 
     try {
-      return await this.runSaleTransaction(async (t, markPaymentAttempted) => {
+      const result = await this.runSaleTransaction(async (t, markPaymentAttempted) => {
         await this.idempotencyModel.create({
           key: idempotencyKey,
           storeId: store.id,
@@ -223,6 +226,8 @@ export class SalesService {
           saleItemsData,
         );
       });
+      await this.productCache?.invalidateStore(store.id).catch(() => undefined);
+      return result;
     } catch (error) {
       if (this.isInventoryQuantityCheckViolation(error)) {
         throw new BadRequestException('Insufficient stock');

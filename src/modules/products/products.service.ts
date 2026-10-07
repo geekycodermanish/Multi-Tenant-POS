@@ -1,27 +1,32 @@
 import {
   Injectable,
   NotFoundException,
+  Inject,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Inject } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { Product, Inventory, User } from '../../database/entities';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { StoresService } from '../stores/stores.service';
+import { ProductCacheService } from './product-cache.service';
+
+const PRODUCT_LIST_CACHE_TTL_MS = 60 * 1000;
 
 @Injectable()
 export class ProductsService {
+  private readonly productCache: ProductCacheService;
+
   constructor(
     @InjectModel(Product) private productModel: typeof Product,
     @InjectModel(Inventory) private inventoryModel: typeof Inventory,
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    @Inject(ProductCacheService) productCache: ProductCacheService | Cache,
     private storesService: StoresService,
-  ) {}
-
-  private cacheKey(storeId: string) {
-    return `products:store:${storeId}`;
+  ) {
+    this.productCache = 'invalidateStore' in productCache &&
+      typeof productCache.invalidateStore === 'function'
+      ? productCache as ProductCacheService
+      : new ProductCacheService(productCache as Cache);
   }
 
   async create(storeId: string, dto: CreateProductDto, user: User): Promise<Product> {
@@ -42,14 +47,14 @@ export class ProductsService {
       quantity: 0,
     } as any);
 
-    await this.cacheManager.del(this.cacheKey(storeId));
+    await this.productCache.invalidateStore(store.id);
     return product;
   }
 
   async findAll(storeId: string, user: User): Promise<Product[]> {
     await this.storesService.assertStoreAccess(user, storeId);
 
-    const cached = await this.cacheManager.get<Product[]>(this.cacheKey(storeId));
+    const cached = await this.productCache.get<Product[]>(storeId, 'list');
     if (cached) return cached;
 
     const products = await this.productModel.findAll({
@@ -57,7 +62,7 @@ export class ProductsService {
       include: [{ model: Inventory, as: 'inventory' }],
     });
 
-    await this.cacheManager.set(this.cacheKey(storeId), products);
+    await this.productCache.set(storeId, 'list', products, PRODUCT_LIST_CACHE_TTL_MS);
     return products;
   }
 
@@ -79,7 +84,7 @@ export class ProductsService {
     });
     if (!product) throw new NotFoundException('Product not found');
     await product.update(dto as any);
-    await this.cacheManager.del(this.cacheKey(product.storeId));
+    await this.productCache.invalidateStore(storeId);
     return product;
   }
 
@@ -91,6 +96,6 @@ export class ProductsService {
     });
     if (!product) throw new NotFoundException('Product not found');
     await product.update({ isActive: false });
-    await this.cacheManager.del(this.cacheKey(product.storeId));
+    await this.productCache.invalidateStore(storeId);
   }
 }

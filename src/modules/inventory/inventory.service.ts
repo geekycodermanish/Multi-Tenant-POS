@@ -1,19 +1,25 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Inject } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { Inventory, Product, User } from '../../database/entities';
 import { AdjustInventoryDto } from './dto/adjust-inventory.dto';
 import { StoresService } from '../stores/stores.service';
+import { ProductCacheService } from '../products/product-cache.service';
 
 @Injectable()
 export class InventoryService {
+  private readonly productCache: ProductCacheService;
+
   constructor(
     @InjectModel(Inventory) private inventoryModel: typeof Inventory,
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    @Inject(ProductCacheService) productCache: ProductCacheService | Cache,
     private storesService: StoresService,
-  ) {}
+  ) {
+    this.productCache = 'invalidateStore' in productCache &&
+      typeof productCache.invalidateStore === 'function'
+      ? productCache as ProductCacheService
+      : new ProductCacheService(productCache as Cache);
+  }
 
   async findByStore(storeId: string, user: User): Promise<Inventory[]> {
     await this.storesService.assertStoreAccess(user, storeId);
@@ -33,8 +39,7 @@ export class InventoryService {
 
     await inv.update({ quantity: dto.quantity });
 
-    // Bust products cache for this store
-    await this.cacheManager.del(`products:store:${inv.storeId}`);
+    await this.productCache.invalidateStore(storeId);
     return inv;
   }
 }

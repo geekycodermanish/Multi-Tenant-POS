@@ -4,11 +4,12 @@ import { Product, Inventory } from '../../database/entities';
 import { ProductsService } from './products.service';
 import { ProductsController } from './products.controller';
 import { StoresModule } from '../stores/stores.module';
+import { ProductCacheService } from './product-cache.service';
 
 @Module({
   imports: [SequelizeModule.forFeature([Product, Inventory]), StoresModule],
-  providers: [ProductsService],
+  providers: [ProductsService, ProductCacheService],
   controllers: [ProductsController],
-  exports: [ProductsService],
+  exports: [ProductsService, ProductCacheService],
 })
 export class ProductsModule {}

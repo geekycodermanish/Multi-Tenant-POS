@@ -5,6 +5,7 @@ import { SalesService } from './sales.service';
 import { SalesController } from './sales.controller';
 import { PaymentsModule } from '../payments/payments.module';
 import { StoresModule } from '../stores/stores.module';
+import { ProductsModule } from '../products/products.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { StoresModule } from '../stores/stores.module';
     SequelizeModule.forFeature([Sale, SaleItem, Payment, Inventory, Product, IdempotencyKey]),
     PaymentsModule,
     StoresModule,
+    ProductsModule,
   ],
   providers: [SalesService],
   controllers: [SalesController],
