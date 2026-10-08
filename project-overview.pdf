@@ -1,0 +1,927 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R] /Count 8 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 5772 >>
+stream
+q
+0.055 0.120 0.220 rg
+0 720 612 72 re f
+0.720 0.830 0.940 rg /F2 8 Tf 1 0 0 1 42.00 768.00 Tm (MULTI-TENANT POS  /  SYSTEM OVERVIEW) Tj
+1.000 1.000 1.000 rg /F2 20 Tf 1 0 0 1 42.00 743.00 Tm (A point-of-sale system for multiple merchants) Tj
+0.820 0.870 0.930 rg /F1 8.5 Tf 1 0 0 1 43.00 728.00 Tm (A concise guide to the application structure, boundaries, API and sale lifecycle.) Tj
+0.080 0.480 0.480 rg /F2 8 Tf 1 0 0 1 42.00 691.00 Tm (01  /  INTRODUCTION) Tj
+0.820 0.860 0.900 RG 0.7 w 42 34 m 570 34 l S
+0.370 0.420 0.490 rg /F1 7.2 Tf 1 0 0 1 42.00 17.00 Tm (SWAZEI MULTI-TENANT POS  |  PROJECT SUBMISSION OVERVIEW) Tj
+0.055 0.120 0.220 rg /F2 13 Tf 1 0 0 1 44.00 665.00 Tm (Project overview) Tj
+0.120 0.160 0.220 rg /F1 10.2 Tf 1 0 0 1 44.00 642.80 Tm (This NestJS API supports platform onboarding and independent merchant operations. A merchant owns) Tj
+0.120 0.160 0.220 rg /F1 10.2 Tf 1 0 0 1 44.00 627.80 Tm (stores; each store owns its product catalogue, inventory and sales. Merchant staff are restricted) Tj
+0.120 0.160 0.220 rg /F1 10.2 Tf 1 0 0 1 44.00 612.80 Tm (to their assigned store.) Tj
+0.880 0.950 0.930 rg
+0.820 0.860 0.900 RG 0.7 w
+44 555 510 38 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 58.00 576.00 Tm (PLATFORM ADMIN) Tj
+0.370 0.420 0.490 rg /F1 8.5 Tf 1 0 0 1 58.00 563.00 Tm (Creates a merchant and its first merchant admin) Tj
+0.080 0.480 0.480 RG 1.2 w 300 554 m 300 538 l S
+0.080 0.480 0.480 RG 1.2 w 300 538 m 297 544 l S
+0.080 0.480 0.480 RG 1.2 w 300 538 m 303 544 l S
+0.890 0.930 0.980 rg
+0.120 0.350 0.620 RG 0.8 w
+62 477 216 58 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 69.00 521.00 Tm (MERCHANT A) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 69.00 498.50 Tm (Merchant admin manages this tenant) Tj
+0.890 0.930 0.980 rg
+0.120 0.350 0.620 RG 0.8 w
+320 477 216 58 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 327.00 521.00 Tm (MERCHANT B) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 327.00 498.50 Tm (Independent tenant and data boundary) Tj
+0.120 0.350 0.620 RG 1.2 w 170 476 m 170 462 l S
+0.120 0.350 0.620 RG 1.2 w 170 462 m 167 468 l S
+0.120 0.350 0.620 RG 1.2 w 170 462 m 173 468 l S
+0.120 0.350 0.620 RG 1.2 w 428 476 m 428 462 l S
+0.120 0.350 0.620 RG 1.2 w 428 462 m 425 468 l S
+0.120 0.350 0.620 RG 1.2 w 428 462 m 431 468 l S
+1.000 1.000 1.000 rg
+0.080 0.480 0.480 RG 0.8 w
+62 409 216 50 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 69.00 445.00 Tm (STORES A1 / A2) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 69.00 422.50 Tm (Created by Merchant Admin A) Tj
+1.000 1.000 1.000 rg
+0.080 0.480 0.480 RG 0.8 w
+320 409 216 50 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 327.00 445.00 Tm (STORES B1 / B2) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 327.00 422.50 Tm (Created by Merchant Admin B) Tj
+0.080 0.480 0.480 RG 1.2 w 170 408 m 170 394 l S
+0.080 0.480 0.480 RG 1.2 w 170 394 m 167 400 l S
+0.080 0.480 0.480 RG 1.2 w 170 394 m 173 400 l S
+0.080 0.480 0.480 RG 1.2 w 428 408 m 428 394 l S
+0.080 0.480 0.480 RG 1.2 w 428 394 m 425 400 l S
+0.080 0.480 0.480 RG 1.2 w 428 394 m 431 400 l S
+0.880 0.950 0.930 rg
+0.080 0.480 0.480 RG 0.8 w
+62 333 216 58 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 69.00 377.00 Tm (STORE STAFF) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 69.00 354.50 Tm (Each staff user is assigned one store) Tj
+0.880 0.950 0.930 rg
+0.080 0.480 0.480 RG 0.8 w
+320 333 216 58 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 327.00 377.00 Tm (STORE STAFF) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 327.00 354.50 Tm (Can access only assigned-store operations) Tj
+0.120 0.350 0.620 RG 1.2 w 170 332 m 170 317 l S
+0.120 0.350 0.620 RG 1.2 w 170 317 m 167 323 l S
+0.120 0.350 0.620 RG 1.2 w 170 317 m 173 323 l S
+0.120 0.350 0.620 RG 1.2 w 428 332 m 428 317 l S
+0.120 0.350 0.620 RG 1.2 w 428 317 m 425 323 l S
+0.120 0.350 0.620 RG 1.2 w 428 317 m 431 323 l S
+0.890 0.930 0.980 rg
+0.120 0.350 0.620 RG 0.8 w
+62 249 216 65 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 69.00 300.00 Tm (STORE OPERATIONS) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 69.00 277.50 Tm (Products, inventory, POS sales and payments) Tj
+0.890 0.930 0.980 rg
+0.120 0.350 0.620 RG 0.8 w
+320 249 216 65 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 327.00 300.00 Tm (STORE OPERATIONS) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 327.00 277.50 Tm (Products, inventory, POS sales and payments) Tj
+0.120 0.350 0.620 rg /F2 8 Tf 1 0 0 1 44.00 211.00 Tm (AT A GLANCE) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+44 121 160 84 re B
+0.120 0.350 0.620 rg
+44 121 4 84 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 57.00 186.00 Tm (API) Tj
+0.120 0.160 0.220 rg /F1 9 Tf 1 0 0 1 57.00 169.00 Tm (NestJS + TypeScript; JSON) Tj
+0.120 0.160 0.220 rg /F1 9 Tf 1 0 0 1 57.00 157.00 Tm (over HTTP; JWT bearer auth.) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+217 121 160 84 re B
+0.080 0.480 0.480 rg
+217 121 4 84 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 230.00 186.00 Tm (Data) Tj
+0.120 0.160 0.220 rg /F1 9 Tf 1 0 0 1 230.00 169.00 Tm (PostgreSQL via Sequelize;) Tj
+0.120 0.160 0.220 rg /F1 9 Tf 1 0 0 1 230.00 157.00 Tm (migrations define schema.) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+390 121 164 84 re B
+0.780 0.390 0.130 rg
+390 121 4 84 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 403.00 186.00 Tm (Runtime services) Tj
+0.120 0.160 0.220 rg /F1 9 Tf 1 0 0 1 403.00 169.00 Tm (Redis product cache; mock) Tj
+0.120 0.160 0.220 rg /F1 9 Tf 1 0 0 1 403.00 157.00 Tm (payment provider; Jest tests.) Tj
+0.370 0.420 0.490 rg /F1 8.2 Tf 1 0 0 1 44.00 93.80 Tm (Seed examples are Zodio / Zodio Sector 86 and Urban Pantry / Urban Pantry Noida, with staff Rahul, Manish and John. The) Tj
+0.370 0.420 0.490 rg /F1 8.2 Tf 1 0 0 1 44.00 82.80 Tm (diagram reflects the implemented roles and tenant scope; it does not imply a separate service per merchant.) Tj
+Q
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 4356 >>
+stream
+q
+0.055 0.120 0.220 rg
+0 720 612 72 re f
+0.720 0.830 0.940 rg /F2 8 Tf 1 0 0 1 42.00 768.00 Tm (MULTI-TENANT POS  /  SYSTEM OVERVIEW) Tj
+1.000 1.000 1.000 rg /F2 20 Tf 1 0 0 1 42.00 743.00 Tm (Roles, responsibilities and access) Tj
+0.820 0.870 0.930 rg /F1 8.5 Tf 1 0 0 1 43.00 728.00 Tm (Authorization is enforced by JWT and role guards, then scoped to the merchant or store.) Tj
+0.080 0.480 0.480 rg /F2 8 Tf 1 0 0 1 42.00 691.00 Tm (02  /  FUNCTIONALITY) Tj
+0.820 0.860 0.900 RG 0.7 w 42 34 m 570 34 l S
+0.370 0.420 0.490 rg /F1 7.2 Tf 1 0 0 1 42.00 17.00 Tm (SWAZEI MULTI-TENANT POS  |  PROJECT SUBMISSION OVERVIEW) Tj
+0.055 0.120 0.220 rg
+44 659 510 22 re f
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 51.00 666.00 Tm (ROLE) Tj
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 161.00 666.00 Tm (CAN DO) Tj
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 369.00 666.00 Tm (CANNOT DO) Tj
+0.930 0.960 0.980 rg
+44 591 510 68 re f
+0.820 0.860 0.900 RG 0.35 w 44 591 m 554 591 l S
+0.055 0.120 0.220 rg /F2 8.3 Tf 1 0 0 1 50.00 647.00 Tm (platform_admin) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 160.00 647.00 Tm (Create a merchant and its first merchant) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 160.00 636.70 Tm (admin.) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 368.00 647.00 Tm (Use tenant routes that are not explicitly) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 368.00 636.70 Tm (platform-authorized.) Tj
+1.000 1.000 1.000 rg
+44 523 510 68 re f
+0.820 0.860 0.900 RG 0.35 w 44 523 m 554 523 l S
+0.055 0.120 0.220 rg /F2 8.3 Tf 1 0 0 1 50.00 579.00 Tm (merchant_admin) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 160.00 579.00 Tm (Manage own stores, staff, products, inventory) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 160.00 568.70 Tm (and sales.) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 368.00 579.00 Tm (Read or modify another merchant tenant.) Tj
+0.930 0.960 0.980 rg
+44 455 510 68 re f
+0.820 0.860 0.900 RG 0.35 w 44 455 m 554 455 l S
+0.055 0.120 0.220 rg /F2 8.3 Tf 1 0 0 1 50.00 511.00 Tm (store_staff) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 160.00 511.00 Tm (Read store catalogue / inventory; create and) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 160.00 500.70 Tm (read sales for assigned store.) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 368.00 511.00 Tm (Create users, adjust inventory, manage) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 368.00 500.70 Tm (products or access another store.) Tj
+0.055 0.120 0.220 rg /F2 15 Tf 1 0 0 1 44.00 425.00 Tm (How a merchant is provisioned) Tj
+0.120 0.350 0.620 rg
+44 374 32 32 re f
+1.000 1.000 1.000 rg /F2 12 Tf 1 0 0 1 55.00 385.00 Tm (1) Tj
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 88.00 394.00 Tm (Platform admin) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 88.00 380.20 Tm (POST /merchants creates the merchant and first merchant admin in one database transaction.) Tj
+0.820 0.860 0.900 RG 1.2 w 60 374 m 60 344 l S
+0.120 0.350 0.620 rg
+44 307 32 32 re f
+1.000 1.000 1.000 rg /F2 12 Tf 1 0 0 1 55.00 318.00 Tm (2) Tj
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 88.00 327.00 Tm (Merchant admin) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 88.00 313.20 Tm (Creates stores, then creates store_staff users with a required storeId.) Tj
+0.820 0.860 0.900 RG 1.2 w 60 307 m 60 277 l S
+0.120 0.350 0.620 rg
+44 240 32 32 re f
+1.000 1.000 1.000 rg /F2 12 Tf 1 0 0 1 55.00 251.00 Tm (3) Tj
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 88.00 260.00 Tm (Store setup) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 88.00 246.20 Tm (Creates products; new products start with a zero-stock inventory row. Inventory can be set by merchant) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 88.00 234.20 Tm (admin.) Tj
+0.820 0.860 0.900 RG 1.2 w 60 240 m 60 210 l S
+0.080 0.480 0.480 rg
+44 173 32 32 re f
+1.000 1.000 1.000 rg /F2 12 Tf 1 0 0 1 55.00 184.00 Tm (4) Tj
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 88.00 193.00 Tm (Store staff) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 88.00 179.20 Tm (Logs in, reads store items and creates a sale using server-calculated prices.) Tj
+0.880 0.950 0.930 rg
+0.820 0.860 0.900 RG 0.7 w
+44 70 510 52 re B
+0.120 0.160 0.220 rg /F1 9 Tf 1 0 0 1 57.00 102.00 Tm (Tenant privacy behavior: out-of-scope merchant/store resources are returned as not found \(404\), rather) Tj
+0.120 0.160 0.220 rg /F1 9 Tf 1 0 0 1 57.00 89.00 Tm (than exposing their existence. A staff account is checked against its assigned store.) Tj
+Q
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 6554 >>
+stream
+q
+0.055 0.120 0.220 rg
+0 720 612 72 re f
+0.720 0.830 0.940 rg /F2 8 Tf 1 0 0 1 42.00 768.00 Tm (MULTI-TENANT POS  /  SYSTEM OVERVIEW) Tj
+1.000 1.000 1.000 rg /F2 20 Tf 1 0 0 1 42.00 743.00 Tm (Application architecture) Tj
+0.820 0.870 0.930 rg /F1 8.5 Tf 1 0 0 1 43.00 728.00 Tm (One NestJS application with feature modules and a shared PostgreSQL database.) Tj
+0.080 0.480 0.480 rg /F2 8 Tf 1 0 0 1 42.00 691.00 Tm (03  /  ARCHITECTURE) Tj
+0.820 0.860 0.900 RG 0.7 w 42 34 m 570 34 l S
+0.370 0.420 0.490 rg /F1 7.2 Tf 1 0 0 1 42.00 17.00 Tm (SWAZEI MULTI-TENANT POS  |  PROJECT SUBMISSION OVERVIEW) Tj
+0.890 0.930 0.980 rg
+0.120 0.350 0.620 RG 0.8 w
+50 622 150 54 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 57.00 662.00 Tm (HTTP CLIENT) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 57.00 639.50 Tm (Web app, POS terminal or Postman) Tj
+0.120 0.350 0.620 RG 1.2 w 202 649 m 230 649 l S
+0.120 0.350 0.620 RG 1.2 w 230 649 m 224 652 l S
+0.120 0.350 0.620 RG 1.2 w 230 649 m 224 646 l S
+0.880 0.950 0.930 rg
+0.080 0.480 0.480 RG 0.8 w
+233 622 160 54 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 240.00 662.00 Tm (NESTJS HTTP LAYER) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 240.00 639.50 Tm (Controllers, DTO validation, JWT and) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 240.00 630.50 Tm (roles) Tj
+0.120 0.350 0.620 RG 1.2 w 395 649 m 421 649 l S
+0.120 0.350 0.620 RG 1.2 w 421 649 m 415 652 l S
+0.120 0.350 0.620 RG 1.2 w 421 649 m 415 646 l S
+0.890 0.930 0.980 rg
+0.120 0.350 0.620 RG 0.8 w
+424 622 138 54 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 431.00 662.00 Tm (SERVICES) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 431.00 639.50 Tm (Business rules and tenant checks) Tj
+0.120 0.350 0.620 RG 1.2 w 493 620 m 493 594 l S
+0.120 0.350 0.620 RG 1.2 w 493 594 m 490 600 l S
+0.120 0.350 0.620 RG 1.2 w 493 594 m 496 600 l S
+1.000 1.000 1.000 rg
+0.080 0.480 0.480 RG 0.8 w
+420 537 142 53 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 427.00 576.00 Tm (SEQUELIZE) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 427.00 553.50 Tm (Models, queries and transactions) Tj
+0.120 0.350 0.620 RG 1.2 w 420 564 m 393 564 l S
+0.120 0.350 0.620 RG 1.2 w 393 564 m 399 567 l S
+0.120 0.350 0.620 RG 1.2 w 393 564 m 399 561 l S
+0.890 0.930 0.980 rg
+0.120 0.350 0.620 RG 0.8 w
+230 537 160 53 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 237.00 576.00 Tm (POSTGRESQL) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 237.00 553.50 Tm (Persistent tenant, stock and sale data) Tj
+0.880 0.950 0.930 rg
+0.080 0.480 0.480 RG 0.8 w
+50 537 150 53 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 57.00 576.00 Tm (PAYMENT TOKEN) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 57.00 553.50 Tm (Mock provider is injected by DI) Tj
+0.880 0.950 0.930 rg
+0.080 0.480 0.480 RG 0.8 w
+50 463 150 53 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 57.00 502.00 Tm (PRODUCT CACHE) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 57.00 479.50 Tm (Per-store keys and version token) Tj
+0.080 0.480 0.480 RG 1.2 w 202 490 m 230 490 l S
+0.080 0.480 0.480 RG 1.2 w 230 490 m 224 493 l S
+0.080 0.480 0.480 RG 1.2 w 230 490 m 224 487 l S
+1.000 1.000 1.000 rg
+0.780 0.390 0.130 RG 0.8 w
+233 463 160 53 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 240.00 502.00 Tm (REDIS) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 240.00 479.50 Tm (In-memory fallback if Redis setup) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 240.00 470.50 Tm (fails) Tj
+0.370 0.420 0.490 rg /F1 7.8 Tf 1 0 0 1 50.00 445.00 Tm (SalesService injects PAYMENT_PROVIDER -> mock provider.) Tj
+0.055 0.120 0.220 rg /F2 13 Tf 1 0 0 1 44.00 429.00 Tm (Feature modules) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+44 364 258 48 re B
+0.120 0.350 0.620 rg
+44 364 4 48 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 57.00 393.00 Tm (auth) Tj
+0.120 0.160 0.220 rg /F1 8.2 Tf 1 0 0 1 57.00 376.80 Tm (Login and JWT issuance) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+310 364 258 48 re B
+0.080 0.480 0.480 rg
+310 364 4 48 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 323.00 393.00 Tm (merchants) Tj
+0.120 0.160 0.220 rg /F1 8.2 Tf 1 0 0 1 323.00 376.80 Tm (Merchant onboarding and tenant reads) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+44 307 258 48 re B
+0.120 0.350 0.620 rg
+44 307 4 48 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 57.00 336.00 Tm (stores) Tj
+0.120 0.160 0.220 rg /F1 8.2 Tf 1 0 0 1 57.00 319.80 Tm (Store creation, listing and access checks) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+310 307 258 48 re B
+0.080 0.480 0.480 rg
+310 307 4 48 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 323.00 336.00 Tm (users) Tj
+0.120 0.160 0.220 rg /F1 8.2 Tf 1 0 0 1 323.00 319.80 Tm (Merchant admin creates store staff) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+44 250 258 48 re B
+0.120 0.350 0.620 rg
+44 250 4 48 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 57.00 279.00 Tm (products) Tj
+0.120 0.160 0.220 rg /F1 8.2 Tf 1 0 0 1 57.00 262.80 Tm (Catalogue and cached product listing) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+310 250 258 48 re B
+0.080 0.480 0.480 rg
+310 250 4 48 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 323.00 279.00 Tm (inventory) Tj
+0.120 0.160 0.220 rg /F1 8.2 Tf 1 0 0 1 323.00 262.80 Tm (Stock query and absolute adjustment) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+44 193 258 48 re B
+0.120 0.350 0.620 rg
+44 193 4 48 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 57.00 222.00 Tm (sales) Tj
+0.120 0.160 0.220 rg /F1 8.2 Tf 1 0 0 1 57.00 205.80 Tm (Sale transaction, idempotency and response) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+310 193 258 48 re B
+0.080 0.480 0.480 rg
+310 193 4 48 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 323.00 222.00 Tm (payments) Tj
+0.120 0.160 0.220 rg /F1 8.2 Tf 1 0 0 1 323.00 205.80 Tm (Provider contract and mock implementation) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+44 136 258 48 re B
+0.120 0.350 0.620 rg
+44 136 4 48 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 57.00 165.00 Tm (health / common) Tj
+0.120 0.160 0.220 rg /F1 8.2 Tf 1 0 0 1 57.00 148.80 Tm (Health checks, guards, filters and decorators) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+310 136 258 48 re B
+0.080 0.480 0.480 rg
+310 136 4 48 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 323.00 165.00 Tm (database) Tj
+0.120 0.160 0.220 rg /F1 8.2 Tf 1 0 0 1 323.00 148.80 Tm (Sequelize entities, migrations and demo seed) Tj
+0.370 0.420 0.490 rg /F1 8.7 Tf 1 0 0 1 44.00 101.30 Tm (There is no separate repository class; services use Sequelize models directly. Global request validation rejects) Tj
+0.370 0.420 0.490 rg /F1 8.7 Tf 1 0 0 1 44.00 89.30 Tm (unknown DTO fields.) Tj
+Q
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 6201 >>
+stream
+q
+0.055 0.120 0.220 rg
+0 720 612 72 re f
+0.720 0.830 0.940 rg /F2 8 Tf 1 0 0 1 42.00 768.00 Tm (MULTI-TENANT POS  /  SYSTEM OVERVIEW) Tj
+1.000 1.000 1.000 rg /F2 20 Tf 1 0 0 1 42.00 743.00 Tm (Core data model) Tj
+0.820 0.870 0.930 rg /F1 8.5 Tf 1 0 0 1 43.00 728.00 Tm (UUID entities are connected through foreign keys; storeId is carried into store-owned records.) Tj
+0.080 0.480 0.480 rg /F2 8 Tf 1 0 0 1 42.00 691.00 Tm (04  /  DATA MODEL) Tj
+0.820 0.860 0.900 RG 0.7 w 42 34 m 570 34 l S
+0.370 0.420 0.490 rg /F1 7.2 Tf 1 0 0 1 42.00 17.00 Tm (SWAZEI MULTI-TENANT POS  |  PROJECT SUBMISSION OVERVIEW) Tj
+0.890 0.930 0.980 rg
+0.120 0.350 0.620 RG 0.8 w
+220 634 172 47 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 227.00 667.00 Tm (MERCHANT) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 227.00 644.50 Tm (id, name, email) Tj
+0.880 0.950 0.930 rg
+0.080 0.480 0.480 RG 0.8 w
+70 528 160 52 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 77.00 566.00 Tm (STORE) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 77.00 543.50 Tm (merchantId, name, address) Tj
+1.000 1.000 1.000 rg
+0.120 0.350 0.620 RG 0.8 w
+254 528 160 52 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 261.00 566.00 Tm (USER) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 261.00 543.50 Tm (role, merchantId, storeId) Tj
+0.890 0.930 0.980 rg
+0.120 0.350 0.620 RG 0.8 w
+432 528 132 52 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 439.00 566.00 Tm (PRODUCT) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 439.00 543.50 Tm (storeId, priceCents) Tj
+0.120 0.350 0.620 RG 1.2 w 260 633 m 180 583 l S
+0.120 0.350 0.620 RG 1.2 w 180 583 m 186 586 l S
+0.120 0.350 0.620 RG 1.2 w 180 583 m 186 580 l S
+0.120 0.350 0.620 RG 1.2 w 325 633 m 334 583 l S
+0.120 0.350 0.620 RG 1.2 w 334 583 m 331 589 l S
+0.120 0.350 0.620 RG 1.2 w 334 583 m 337 589 l S
+0.120 0.350 0.620 RG 1.2 w 380 633 m 490 583 l S
+0.120 0.350 0.620 RG 1.2 w 490 583 m 484 586 l S
+0.120 0.350 0.620 RG 1.2 w 490 583 m 484 580 l S
+0.880 0.950 0.930 rg
+0.080 0.480 0.480 RG 0.8 w
+74 417 152 51 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 81.00 454.00 Tm (INVENTORY) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 81.00 431.50 Tm (productId, storeId, quantity) Tj
+0.890 0.930 0.980 rg
+0.120 0.350 0.620 RG 0.8 w
+271 417 153 51 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 278.00 454.00 Tm (SALE) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 278.00 431.50 Tm (storeId, billNumber, totalCents) Tj
+1.000 1.000 1.000 rg
+0.080 0.480 0.480 RG 0.8 w
+448 417 116 51 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 455.00 454.00 Tm (IDEMPOTENCY) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 455.00 431.50 Tm (key + storeId, hash) Tj
+0.080 0.480 0.480 RG 1.2 w 150 527 m 150 471 l S
+0.080 0.480 0.480 RG 1.2 w 150 471 m 147 477 l S
+0.080 0.480 0.480 RG 1.2 w 150 471 m 153 477 l S
+0.120 0.350 0.620 RG 1.2 w 355 527 m 355 471 l S
+0.120 0.350 0.620 RG 1.2 w 355 471 m 352 477 l S
+0.120 0.350 0.620 RG 1.2 w 355 471 m 358 477 l S
+0.080 0.480 0.480 RG 1.2 w 494 527 m 494 471 l S
+0.080 0.480 0.480 RG 1.2 w 494 471 m 491 477 l S
+0.080 0.480 0.480 RG 1.2 w 494 471 m 497 477 l S
+0.080 0.480 0.480 RG 1.2 w 432 553 m 228 448 l S
+0.080 0.480 0.480 RG 1.2 w 228 448 m 234 451 l S
+0.080 0.480 0.480 RG 1.2 w 228 448 m 234 445 l S
+0.120 0.350 0.620 RG 1.2 w 432 553 m 424 448 l S
+0.120 0.350 0.620 RG 1.2 w 424 448 m 421 454 l S
+0.120 0.350 0.620 RG 1.2 w 424 448 m 427 454 l S
+1.000 1.000 1.000 rg
+0.120 0.350 0.620 RG 0.8 w
+177 314 153 51 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 184.00 351.00 Tm (SALE ITEM) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 184.00 328.50 Tm (saleId, productId, quantity, price) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 184.00 319.50 Tm (snapshot) Tj
+0.880 0.950 0.930 rg
+0.080 0.480 0.480 RG 0.8 w
+350 314 145 51 re B
+0.055 0.120 0.220 rg /F2 9 Tf 1 0 0 1 357.00 351.00 Tm (PAYMENT) Tj
+0.370 0.420 0.490 rg /F1 7.5 Tf 1 0 0 1 357.00 328.50 Tm (saleId, amount, status, method) Tj
+0.120 0.350 0.620 RG 1.2 w 348 416 m 270 368 l S
+0.120 0.350 0.620 RG 1.2 w 270 368 m 276 371 l S
+0.120 0.350 0.620 RG 1.2 w 270 368 m 276 365 l S
+0.080 0.480 0.480 RG 1.2 w 371 416 m 420 368 l S
+0.080 0.480 0.480 RG 1.2 w 420 368 m 414 371 l S
+0.080 0.480 0.480 RG 1.2 w 420 368 m 414 365 l S
+0.120 0.350 0.620 RG 1.2 w 220 341 m 328 528 l S
+0.120 0.350 0.620 RG 1.2 w 328 528 m 325 522 l S
+0.120 0.350 0.620 RG 1.2 w 328 528 m 331 522 l S
+0.080 0.480 0.480 RG 1.2 w 448 442 m 427 442 l S
+0.080 0.480 0.480 RG 1.2 w 427 442 m 433 445 l S
+0.080 0.480 0.480 RG 1.2 w 427 442 m 433 439 l S
+0.120 0.350 0.620 rg /F2 8 Tf 1 0 0 1 44.00 269.00 Tm (IMPORTANT SCHEMA DECISIONS) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+44 181 246 81 re B
+0.120 0.350 0.620 rg
+44 181 4 81 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 57.00 243.00 Tm (Money) Tj
+0.120 0.160 0.220 rg /F1 8.5 Tf 1 0 0 1 57.00 226.50 Tm (Product prices, sale totals, payment amounts and) Tj
+0.120 0.160 0.220 rg /F1 8.5 Tf 1 0 0 1 57.00 215.00 Tm (sale-item prices are stored as integer cents in) Tj
+0.120 0.160 0.220 rg /F1 8.5 Tf 1 0 0 1 57.00 203.50 Tm (BIGINT columns.) Tj
+0.880 0.950 0.930 rg
+0.820 0.860 0.900 RG 0.7 w
+308 181 246 81 re B
+0.080 0.480 0.480 rg
+308 181 4 81 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 321.00 243.00 Tm (Stock safety) Tj
+0.120 0.160 0.220 rg /F1 8.5 Tf 1 0 0 1 321.00 226.50 Tm (Inventory has a database CHECK constraint requiring) Tj
+0.120 0.160 0.220 rg /F1 8.5 Tf 1 0 0 1 321.00 215.00 Tm (quantity >= 0 and one inventory record per product.) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+44 88 246 81 re B
+0.780 0.390 0.130 rg
+44 88 4 81 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 57.00 150.00 Tm (Bill numbering) Tj
+0.120 0.160 0.220 rg /F1 8.5 Tf 1 0 0 1 57.00 133.50 Tm (sales_bill_seq is global. PostgreSQL sequence) Tj
+0.120 0.160 0.220 rg /F1 8.5 Tf 1 0 0 1 57.00 122.00 Tm (values can have gaps after transaction rollback.) Tj
+0.880 0.950 0.930 rg
+0.820 0.860 0.900 RG 0.7 w
+308 88 246 81 re B
+0.080 0.480 0.480 rg
+308 88 4 81 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 321.00 150.00 Tm (Idempotency) Tj
+0.120 0.160 0.220 rg /F1 8.5 Tf 1 0 0 1 321.00 133.50 Tm (A unique \(key, storeId\) claim links a request hash) Tj
+0.120 0.160 0.220 rg /F1 8.5 Tf 1 0 0 1 321.00 122.00 Tm (to the completed sale response.) Tj
+Q
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 4069 >>
+stream
+q
+0.055 0.120 0.220 rg
+0 720 612 72 re f
+0.720 0.830 0.940 rg /F2 8 Tf 1 0 0 1 42.00 768.00 Tm (MULTI-TENANT POS  /  SYSTEM OVERVIEW) Tj
+1.000 1.000 1.000 rg /F2 20 Tf 1 0 0 1 42.00 743.00 Tm (Sale creation: validated, locked, charged) Tj
+0.820 0.870 0.930 rg /F1 8.5 Tf 1 0 0 1 43.00 728.00 Tm (The provider is called only after stock validation and sale rows have been prepared.) Tj
+0.080 0.480 0.480 rg /F2 8 Tf 1 0 0 1 42.00 691.00 Tm (05  /  POS SALE) Tj
+0.820 0.860 0.900 RG 0.7 w 42 34 m 570 34 l S
+0.370 0.420 0.490 rg /F1 7.2 Tf 1 0 0 1 42.00 17.00 Tm (SWAZEI MULTI-TENANT POS  |  PROJECT SUBMISSION OVERVIEW) Tj
+0.120 0.350 0.620 rg
+44 658 27 27 re f
+1.000 1.000 1.000 rg /F2 9 Tf 1 0 0 1 52.00 667.00 Tm (1) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 84.00 677.20 Tm (Authenticate bearer JWT; authorize the caller for the route store.) Tj
+0.820 0.860 0.900 RG 1 w 57 656 m 57 632 l S
+0.120 0.350 0.620 rg
+44 601 27 27 re f
+1.000 1.000 1.000 rg /F2 9 Tf 1 0 0 1 52.00 610.00 Tm (2) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 84.00 620.20 Tm (Require Idempotency-Key \(8-128 letters, digits, underscore or hyphen\); hash the request.) Tj
+0.820 0.860 0.900 RG 1 w 57 599 m 57 575 l S
+0.120 0.350 0.620 rg
+44 544 27 27 re f
+1.000 1.000 1.000 rg /F2 9 Tf 1 0 0 1 52.00 553.00 Tm (3) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 84.00 563.20 Tm (Return the stored response for a matching completed request; reject key reuse with a different payload.) Tj
+0.820 0.860 0.900 RG 1 w 57 542 m 57 518 l S
+0.120 0.350 0.620 rg
+44 487 27 27 re f
+1.000 1.000 1.000 rg /F2 9 Tf 1 0 0 1 52.00 496.00 Tm (4) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 84.00 506.20 Tm (Start READ COMMITTED transaction and insert the store-scoped idempotency claim first.) Tj
+0.820 0.860 0.900 RG 1 w 57 485 m 57 461 l S
+0.120 0.350 0.620 rg
+44 430 27 27 re f
+1.000 1.000 1.000 rg /F2 9 Tf 1 0 0 1 52.00 439.00 Tm (5) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 84.00 449.20 Tm (Combine duplicate product IDs; validate positive integer quantities.) Tj
+0.820 0.860 0.900 RG 1 w 57 428 m 57 404 l S
+0.120 0.350 0.620 rg
+44 373 27 27 re f
+1.000 1.000 1.000 rg /F2 9 Tf 1 0 0 1 52.00 382.00 Tm (6) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 84.00 392.20 Tm (Lock inventory rows with SELECT FOR UPDATE ordered by productId; load active products in the same) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 84.00 380.20 Tm (store.) Tj
+0.820 0.860 0.900 RG 1 w 57 371 m 57 347 l S
+0.120 0.350 0.620 rg
+44 316 27 27 re f
+1.000 1.000 1.000 rg /F2 9 Tf 1 0 0 1 52.00 325.00 Tm (7) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 84.00 335.20 Tm (Check stock and calculate line subtotals and total from database prices; decrement stock.) Tj
+0.820 0.860 0.900 RG 1 w 57 314 m 57 290 l S
+0.120 0.350 0.620 rg
+44 259 27 27 re f
+1.000 1.000 1.000 rg /F2 9 Tf 1 0 0 1 52.00 268.00 Tm (8) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 84.00 278.20 Tm (Allocate bill number; insert sale and item snapshots; mark payment attempted and call provider.) Tj
+0.820 0.860 0.900 RG 1 w 57 257 m 57 233 l S
+0.080 0.480 0.480 rg
+44 202 27 27 re f
+1.000 1.000 1.000 rg /F2 9 Tf 1 0 0 1 52.00 211.00 Tm (9) Tj
+0.120 0.160 0.220 rg /F1 8.8 Tf 1 0 0 1 84.00 221.20 Tm (Write payment and complete sale; commit. After commit, invalidate that store product-cache version.) Tj
+0.890 0.930 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+44 66 510 91 re B
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 58.00 139.00 Tm (Concurrency and retry behavior) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 58.00 122.70 Tm (For stock 5 and two concurrent sales of 3, the inventory row lock serializes the updates: one sale succeeds, the) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 58.00 111.70 Tm (other receives insufficient stock, final stock is 2. PostgreSQL deadlock \(40P01\) and serialization \(40001\) errors) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 58.00 100.70 Tm (may retry up to the existing limit only before payment is attempted. Errors after the provider call are rethrown.) Tj
+0.120 0.160 0.220 rg /F1 8.3 Tf 1 0 0 1 58.00 89.70 Tm (23505 is not retried.) Tj
+Q
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 5802 >>
+stream
+q
+0.055 0.120 0.220 rg
+0 720 612 72 re f
+0.720 0.830 0.940 rg /F2 8 Tf 1 0 0 1 42.00 768.00 Tm (MULTI-TENANT POS  /  SYSTEM OVERVIEW) Tj
+1.000 1.000 1.000 rg /F2 20 Tf 1 0 0 1 42.00 743.00 Tm (API reference: accounts and tenant setup) Tj
+0.820 0.870 0.930 rg /F1 8.5 Tf 1 0 0 1 43.00 728.00 Tm (No global prefix. Protected routes use a bearer token in the Authorization header.) Tj
+0.080 0.480 0.480 rg /F2 8 Tf 1 0 0 1 42.00 691.00 Tm (06  /  HTTP API) Tj
+0.820 0.860 0.900 RG 0.7 w 42 34 m 570 34 l S
+0.370 0.420 0.490 rg /F1 7.2 Tf 1 0 0 1 42.00 17.00 Tm (SWAZEI MULTI-TENANT POS  |  PROJECT SUBMISSION OVERVIEW) Tj
+0.055 0.120 0.220 rg
+44 658 510 22 re f
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 51.00 665.00 Tm (ENDPOINT) Tj
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 256.00 665.00 Tm (ACCESS) Tj
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 334.00 665.00 Tm (BODY) Tj
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 471.00 665.00 Tm (PURPOSE) Tj
+0.930 0.960 0.980 rg
+44 615 510 43 re f
+0.820 0.860 0.900 RG 0.35 w 44 615 m 554 615 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 646.00 Tm (POST /auth/login) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 255.00 646.00 Tm (Public) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 333.00 646.00 Tm (email, password) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 470.00 646.00 Tm (JWT login) Tj
+1.000 1.000 1.000 rg
+44 572 510 43 re f
+0.820 0.860 0.900 RG 0.35 w 44 572 m 554 572 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 603.00 Tm (POST /merchants) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 255.00 603.00 Tm (platform_admin) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 333.00 603.00 Tm (name, email, adminName,) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 333.00 593.60 Tm (adminEmail, adminPassword) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 470.00 603.00 Tm (Create merchant +) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 470.00 593.60 Tm (admin) Tj
+0.930 0.960 0.980 rg
+44 529 510 43 re f
+0.820 0.860 0.900 RG 0.35 w 44 529 m 554 529 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 560.00 Tm (GET /merchants) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 255.00 560.00 Tm (Tenant users) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 333.00 560.00 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 470.00 560.00 Tm (Own merchant) Tj
+1.000 1.000 1.000 rg
+44 486 510 43 re f
+0.820 0.860 0.900 RG 0.35 w 44 486 m 554 486 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 517.00 Tm (GET /merchants/:id) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 255.00 517.00 Tm (Tenant users) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 333.00 517.00 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 470.00 517.00 Tm (Own merchant detail) Tj
+0.930 0.960 0.980 rg
+44 443 510 43 re f
+0.820 0.860 0.900 RG 0.35 w 44 443 m 554 443 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 474.00 Tm (POST /stores) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 255.00 474.00 Tm (merchant_admin) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 333.00 474.00 Tm (name, address?) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 470.00 474.00 Tm (Create own store) Tj
+1.000 1.000 1.000 rg
+44 400 510 43 re f
+0.820 0.860 0.900 RG 0.35 w 44 400 m 554 400 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 431.00 Tm (GET /stores) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 255.00 431.00 Tm (Tenant users) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 333.00 431.00 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 470.00 431.00 Tm (Visible stores) Tj
+0.930 0.960 0.980 rg
+44 357 510 43 re f
+0.820 0.860 0.900 RG 0.35 w 44 357 m 554 357 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 388.00 Tm (GET /stores/:id) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 255.00 388.00 Tm (Tenant users) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 333.00 388.00 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 470.00 388.00 Tm (Visible store detail) Tj
+1.000 1.000 1.000 rg
+44 314 510 43 re f
+0.820 0.860 0.900 RG 0.35 w 44 314 m 554 314 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 345.00 Tm (POST /users) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 255.00 345.00 Tm (merchant_admin) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 333.00 345.00 Tm (name, email, password, storeId) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 470.00 345.00 Tm (Create store staff) Tj
+0.930 0.960 0.980 rg
+44 271 510 43 re f
+0.820 0.860 0.900 RG 0.35 w 44 271 m 554 271 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 302.00 Tm (GET /users) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 255.00 302.00 Tm (merchant_admin) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 333.00 302.00 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 470.00 302.00 Tm (Own tenant users) Tj
+1.000 1.000 1.000 rg
+44 228 510 43 re f
+0.820 0.860 0.900 RG 0.35 w 44 228 m 554 228 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 259.00 Tm (GET /users/:id) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 255.00 259.00 Tm (merchant_admin) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 333.00 259.00 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 470.00 259.00 Tm (Own tenant user) Tj
+0.880 0.950 0.930 rg
+0.820 0.860 0.900 RG 0.7 w
+44 102 510 105 re B
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 58.00 188.00 Tm (Validation and authorization) Tj
+0.120 0.160 0.220 rg /F1 8.4 Tf 1 0 0 1 58.00 171.60 Tm (The global ValidationPipe transforms DTO inputs, removes no extra fields silently, and rejects non-whitelisted) Tj
+0.120 0.160 0.220 rg /F1 8.4 Tf 1 0 0 1 58.00 159.60 Tm (properties. Login requires an email and password. Merchant onboarding creates the merchant and first merchant) Tj
+0.120 0.160 0.220 rg /F1 8.4 Tf 1 0 0 1 58.00 147.60 Tm (admin atomically. User creation always creates store_staff and requires a storeId within the admin merchant.) Tj
+0.370 0.420 0.490 rg /F1 8.1 Tf 1 0 0 1 44.00 77.90 Tm (Health checks are public: GET /health, GET /health/database and GET /health/cache.) Tj
+Q
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Length 7936 >>
+stream
+q
+0.055 0.120 0.220 rg
+0 720 612 72 re f
+0.720 0.830 0.940 rg /F2 8 Tf 1 0 0 1 42.00 768.00 Tm (MULTI-TENANT POS  /  SYSTEM OVERVIEW) Tj
+1.000 1.000 1.000 rg /F2 20 Tf 1 0 0 1 42.00 743.00 Tm (API reference: store operations) Tj
+0.820 0.870 0.930 rg /F1 8.5 Tf 1 0 0 1 43.00 728.00 Tm (Route store IDs are checked against both the caller tenant and assigned staff store.) Tj
+0.080 0.480 0.480 rg /F2 8 Tf 1 0 0 1 42.00 691.00 Tm (07  /  STORE API) Tj
+0.820 0.860 0.900 RG 0.7 w 42 34 m 570 34 l S
+0.370 0.420 0.490 rg /F1 7.2 Tf 1 0 0 1 42.00 17.00 Tm (SWAZEI MULTI-TENANT POS  |  PROJECT SUBMISSION OVERVIEW) Tj
+0.055 0.120 0.220 rg
+44 658 510 22 re f
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 51.00 665.00 Tm (ENDPOINT) Tj
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 278.00 665.00 Tm (ACCESS) Tj
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 356.00 665.00 Tm (BODY / HEADER) Tj
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 493.00 665.00 Tm (PURPOSE) Tj
+0.930 0.960 0.980 rg
+44 622 510 36 re f
+0.820 0.860 0.900 RG 0.35 w 44 622 m 554 622 l S
+0.055 0.120 0.220 rg /F2 7.1 Tf 1 0 0 1 50.00 646.00 Tm (POST /stores/:storeId/products) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 277.00 646.00 Tm (merchant_admin) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 355.00 646.00 Tm (name, priceCents, description?,) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 355.00 636.90 Tm (sku?) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 492.00 646.00 Tm (Create product) Tj
+1.000 1.000 1.000 rg
+44 586 510 36 re f
+0.820 0.860 0.900 RG 0.35 w 44 586 m 554 586 l S
+0.055 0.120 0.220 rg /F2 7.1 Tf 1 0 0 1 50.00 610.00 Tm (GET /stores/:storeId/products) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 277.00 610.00 Tm (Tenant users) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 355.00 610.00 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 492.00 610.00 Tm (List active) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 492.00 600.90 Tm (products) Tj
+0.930 0.960 0.980 rg
+44 550 510 36 re f
+0.820 0.860 0.900 RG 0.35 w 44 550 m 554 550 l S
+0.055 0.120 0.220 rg /F2 7.1 Tf 1 0 0 1 50.00 574.00 Tm (GET /stores/:storeId/products/:id) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 277.00 574.00 Tm (Tenant users) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 355.00 574.00 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 492.00 574.00 Tm (Read active) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 492.00 564.90 Tm (product) Tj
+1.000 1.000 1.000 rg
+44 514 510 36 re f
+0.820 0.860 0.900 RG 0.35 w 44 514 m 554 514 l S
+0.055 0.120 0.220 rg /F2 7.1 Tf 1 0 0 1 50.00 538.00 Tm (PUT /stores/:storeId/products/:id) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 277.00 538.00 Tm (merchant_admin) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 355.00 538.00 Tm (name?, priceCents?, description?,) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 355.00 528.90 Tm (sku?) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 492.00 538.00 Tm (Update product) Tj
+0.930 0.960 0.980 rg
+44 478 510 36 re f
+0.820 0.860 0.900 RG 0.35 w 44 478 m 554 478 l S
+0.055 0.120 0.220 rg /F2 7.1 Tf 1 0 0 1 50.00 502.00 Tm (DELETE /stores/:storeId/products/:id) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 277.00 502.00 Tm (merchant_admin) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 355.00 502.00 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 492.00 502.00 Tm (Deactivate) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 492.00 492.90 Tm (product) Tj
+1.000 1.000 1.000 rg
+44 442 510 36 re f
+0.820 0.860 0.900 RG 0.35 w 44 442 m 554 442 l S
+0.055 0.120 0.220 rg /F2 7.1 Tf 1 0 0 1 50.00 466.00 Tm (GET /stores/:storeId/inventory) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 277.00 466.00 Tm (Tenant users) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 355.00 466.00 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 492.00 466.00 Tm (List inventory) Tj
+0.930 0.960 0.980 rg
+44 406 510 36 re f
+0.820 0.860 0.900 RG 0.35 w 44 406 m 554 406 l S
+0.055 0.120 0.220 rg /F2 7.1 Tf 1 0 0 1 50.00 430.00 Tm (PUT /stores/:storeId/inventory/products/:productId) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 277.00 430.00 Tm (merchant_admin) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 355.00 430.00 Tm (quantity) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 492.00 430.00 Tm (Set stock) Tj
+1.000 1.000 1.000 rg
+44 370 510 36 re f
+0.820 0.860 0.900 RG 0.35 w 44 370 m 554 370 l S
+0.055 0.120 0.220 rg /F2 7.1 Tf 1 0 0 1 50.00 394.00 Tm (POST /stores/:storeId/sales) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 277.00 394.00 Tm (Tenant users) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 355.00 394.00 Tm (items, paymentMethod, notes?;) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 355.00 384.90 Tm (Idempotency-Key header) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 492.00 394.00 Tm (Create sale) Tj
+0.930 0.960 0.980 rg
+44 334 510 36 re f
+0.820 0.860 0.900 RG 0.35 w 44 334 m 554 334 l S
+0.055 0.120 0.220 rg /F2 7.1 Tf 1 0 0 1 50.00 358.00 Tm (GET /stores/:storeId/sales) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 277.00 358.00 Tm (Tenant users) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 355.00 358.00 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 492.00 358.00 Tm (List sales) Tj
+1.000 1.000 1.000 rg
+44 298 510 36 re f
+0.820 0.860 0.900 RG 0.35 w 44 298 m 554 298 l S
+0.055 0.120 0.220 rg /F2 7.1 Tf 1 0 0 1 50.00 322.00 Tm (GET /stores/:storeId/sales/:id) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 277.00 322.00 Tm (Tenant users) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 355.00 322.00 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.1 Tf 1 0 0 1 492.00 322.00 Tm (Read sale) Tj
+0.055 0.120 0.220 rg /F2 11 Tf 1 0 0 1 44.00 234.00 Tm (Cache and payment behavior) Tj
+0.890 0.930 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+44 118 162 102 re B
+0.120 0.350 0.620 rg
+44 118 4 102 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 57.00 201.00 Tm (Idempotency) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 57.00 185.30 Tm (Send Idempotency-Key in the header.) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 57.00 174.60 Tm (Same key and payload replays the) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 57.00 163.90 Tm (sale; different payload returns) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 57.00 153.20 Tm (422. Claims are unique per store) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 57.00 142.50 Tm (and created in the transaction.) Tj
+0.880 0.950 0.930 rg
+0.820 0.860 0.900 RG 0.7 w
+218 118 162 102 re B
+0.080 0.480 0.480 rg
+218 118 4 102 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 231.00 201.00 Tm (Product cache) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 231.00 185.30 Tm (Active product lists with inventory) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 231.00 174.60 Tm (are cached per store. TTL is 60) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 231.00 163.90 Tm (seconds; version changes invalidate) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 231.00 153.20 Tm (after updates and committed sales.) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 231.00 142.50 Tm (Cache timeout is 500 ms; Redis) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 231.00 131.80 Tm (failure falls back to memory.) Tj
+0.930 0.960 0.980 rg
+0.820 0.860 0.900 RG 0.7 w
+392 118 162 102 re B
+0.780 0.390 0.130 rg
+392 118 4 102 re f
+0.055 0.120 0.220 rg /F2 10 Tf 1 0 0 1 405.00 201.00 Tm (Payment mock) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 405.00 185.30 Tm (PAYMENT_FAIL_RATE=0 always) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 405.00 174.60 Tm (succeeds; 1 always fails. Failed) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 405.00 163.90 Tm (payment rolls back sale and stock) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 405.00 153.20 Tm (data, but the external provider) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 405.00 142.50 Tm (call cannot be rolled back or) Tj
+0.120 0.160 0.220 rg /F1 7.7 Tf 1 0 0 1 405.00 131.80 Tm (refunded.) Tj
+0.370 0.420 0.490 rg /F1 8 Tf 1 0 0 1 44.00 94.00 Tm (Tenant users means merchant_admin or store_staff. Sale items contain productId and quantity; paymentMethod is cash, card or) Tj
+0.370 0.420 0.490 rg /F1 8 Tf 1 0 0 1 44.00 83.00 Tm (upi. Prices are never accepted from the client.) Tj
+Q
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 17 0 R >>
+endobj
+19 0 obj
+<< /Length 6852 >>
+stream
+q
+0.055 0.120 0.220 rg
+0 720 612 72 re f
+0.720 0.830 0.940 rg /F2 8 Tf 1 0 0 1 42.00 768.00 Tm (MULTI-TENANT POS  /  SYSTEM OVERVIEW) Tj
+1.000 1.000 1.000 rg /F2 20 Tf 1 0 0 1 42.00 743.00 Tm (Running, testing and project notes) Tj
+0.820 0.870 0.930 rg /F1 8.5 Tf 1 0 0 1 43.00 728.00 Tm (Requirements: Node.js + npm and PostgreSQL; Redis is optional.) Tj
+0.080 0.480 0.480 rg /F2 8 Tf 1 0 0 1 42.00 691.00 Tm (08  /  OPERATIONS) Tj
+0.820 0.860 0.900 RG 0.7 w 42 34 m 570 34 l S
+0.370 0.420 0.490 rg /F1 7.2 Tf 1 0 0 1 42.00 17.00 Tm (SWAZEI MULTI-TENANT POS  |  PROJECT SUBMISSION OVERVIEW) Tj
+0.055 0.120 0.220 rg /F2 11 Tf 1 0 0 1 44.00 674.00 Tm (Quick start) Tj
+0.055 0.120 0.220 rg
+44 527 510 138 re f
+1.000 1.000 1.000 rg /F1 8.1 Tf 1 0 0 1 57.00 646.00 Tm (git clone https://github.com/geekycodermanish/Multi-Tenant-POS.git) Tj
+1.000 1.000 1.000 rg /F1 8.1 Tf 1 0 0 1 57.00 629.00 Tm (cd Multi-Tenant-POS  &&  npm install) Tj
+1.000 1.000 1.000 rg /F1 8.1 Tf 1 0 0 1 57.00 612.00 Tm (cp .env.example .env   \(set PLATFORM_ADMIN_EMAIL and PLATFORM_ADMIN_PASSWORD\)) Tj
+1.000 1.000 1.000 rg /F1 8.1 Tf 1 0 0 1 57.00 595.00 Tm (createdb swazei_pos) Tj
+1.000 1.000 1.000 rg /F1 8.1 Tf 1 0 0 1 57.00 578.00 Tm (npm run migration:run  &&  npm run seed) Tj
+1.000 1.000 1.000 rg /F1 8.1 Tf 1 0 0 1 57.00 561.00 Tm (npm run start:dev) Tj
+1.000 1.000 1.000 rg /F1 8.1 Tf 1 0 0 1 57.00 544.00 Tm (curl http://localhost:3000/health/database) Tj
+0.055 0.120 0.220 rg /F2 11 Tf 1 0 0 1 44.00 502.00 Tm (Runtime configuration) Tj
+0.055 0.120 0.220 rg
+44 471 510 22 re f
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 51.00 478.00 Tm (VARIABLE) Tj
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 185.00 478.00 Tm (PURPOSE) Tj
+1.000 1.000 1.000 rg /F2 8 Tf 1 0 0 1 395.00 478.00 Tm (EXAMPLE) Tj
+0.930 0.960 0.980 rg
+44 441 510 30 re f
+0.820 0.860 0.900 RG 0.35 w 44 441 m 554 441 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 459.00 Tm (PORT / NODE_ENV) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 184.00 459.00 Tm (Listen port / environment) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 394.00 459.00 Tm (3000 / development) Tj
+1.000 1.000 1.000 rg
+44 411 510 30 re f
+0.820 0.860 0.900 RG 0.35 w 44 411 m 554 411 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 429.00 Tm (DB_HOST / DB_PORT / DB_USERNAME) Tj
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 419.60 Tm (/ DB_PASSWORD / DB_NAME) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 184.00 429.00 Tm (PostgreSQL connection) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 394.00 429.00 Tm (localhost / 5432 / swazei_pos) Tj
+0.930 0.960 0.980 rg
+44 381 510 30 re f
+0.820 0.860 0.900 RG 0.35 w 44 381 m 554 381 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 399.00 Tm (JWT_SECRET / JWT_EXPIRES_IN) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 184.00 399.00 Tm (JWT signing / token lifetime) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 394.00 399.00 Tm (set a private secret / 8h) Tj
+1.000 1.000 1.000 rg
+44 351 510 30 re f
+0.820 0.860 0.900 RG 0.35 w 44 351 m 554 351 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 369.00 Tm (PLATFORM_ADMIN_EMAIL / PASSWORD) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 184.00 369.00 Tm (Seed initial platform admin) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 394.00 369.00 Tm (set locally; password >= 8 chars) Tj
+0.930 0.960 0.980 rg
+44 321 510 30 re f
+0.820 0.860 0.900 RG 0.35 w 44 321 m 554 321 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 339.00 Tm (REDIS_HOST / REDIS_PORT /) Tj
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 329.60 Tm (REDIS_TTL) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 184.00 339.00 Tm (Redis product cache) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 394.00 339.00 Tm (localhost / 6379 / 300) Tj
+1.000 1.000 1.000 rg
+44 291 510 30 re f
+0.820 0.860 0.900 RG 0.35 w 44 291 m 554 291 l S
+0.055 0.120 0.220 rg /F2 7.4 Tf 1 0 0 1 50.00 309.00 Tm (PAYMENT_FAIL_RATE) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 184.00 309.00 Tm (Mock payment failure chance) Tj
+0.120 0.160 0.220 rg /F1 7.4 Tf 1 0 0 1 394.00 309.00 Tm (0 succeeds, 1 always fails) Tj
+0.055 0.120 0.220 rg /F2 11 Tf 1 0 0 1 44.00 274.00 Tm (Code and test layout) Tj
+0.120 0.160 0.220 rg /F1 8.1 Tf 1 0 0 1 44.00 257.90 Tm (src/modules/{auth,merchants,stores,users,products,inventory,sales,payments} contains the feature modules. src/common) Tj
+0.120 0.160 0.220 rg /F1 8.1 Tf 1 0 0 1 44.00 246.90 Tm (contains guards, decorators, exception filter and health checks. src/database contains entities, migrations and seed. Unit) Tj
+0.120 0.160 0.220 rg /F1 8.1 Tf 1 0 0 1 44.00 235.90 Tm (specs are colocated under src; integration suites cover auth, onboarding, tenant isolation, sales, inventory, idempotency,) Tj
+0.120 0.160 0.220 rg /F1 8.1 Tf 1 0 0 1 44.00 224.90 Tm (concurrency and regressions.) Tj
+0.120 0.160 0.220 rg /F1 8.1 Tf 1 0 0 1 44.00 203.90 Tm (Useful commands: npm run test:unit, npm run test:int, npm run build. Integration setup requires a separate test database;) Tj
+0.120 0.160 0.220 rg /F1 8.1 Tf 1 0 0 1 44.00 192.90 Tm (read test/jest.global-setup.ts before running it because the setup recreates the public schema.) Tj
+0.055 0.120 0.220 rg /F2 11 Tf 1 0 0 1 44.00 166.00 Tm (Implementation boundaries to know) Tj
+0.080 0.480 0.480 rg /F2 7.8 Tf 1 0 0 1 44.00 151.20 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.8 Tf 1 0 0 1 56.00 151.20 Tm (Payment runs while stock row locks are held; acceptable for this fast mock, not a production payment flow.) Tj
+0.080 0.480 0.480 rg /F2 7.8 Tf 1 0 0 1 44.00 130.20 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.8 Tf 1 0 0 1 56.00 130.20 Tm (A failed charge rolls back database sale and stock data, but cannot undo or refund the external provider call.) Tj
+0.080 0.480 0.480 rg /F2 7.8 Tf 1 0 0 1 44.00 109.20 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.8 Tf 1 0 0 1 56.00 109.20 Tm (Idempotency claims do not expire; bill numbers are global and sequence values may have gaps after rollback.) Tj
+0.080 0.480 0.480 rg /F2 7.8 Tf 1 0 0 1 44.00 88.20 Tm (-) Tj
+0.120 0.160 0.220 rg /F1 7.8 Tf 1 0 0 1 56.00 88.20 Tm (Product-list cache uses per-store versions; list TTL is 60 seconds and cache calls time out after 500 ms.) Tj
+0.820 0.860 0.900 RG 0.7 w 44 63 m 554 63 l S
+0.370 0.420 0.490 rg /F1 7.2 Tf 1 0 0 1 44.00 48.00 Tm (Repository: github.com/geekycodermanish/Multi-Tenant-POS  |  License: UNLICENSED \(no LICENSE file\).) Tj
+0.370 0.420 0.490 rg /F2 7.2 Tf 1 0 0 1 530.00 17.00 Tm (1 / 8) Tj
+0.370 0.420 0.490 rg /F2 7.2 Tf 1 0 0 1 530.00 17.00 Tm (2 / 8) Tj
+0.370 0.420 0.490 rg /F2 7.2 Tf 1 0 0 1 530.00 17.00 Tm (3 / 8) Tj
+0.370 0.420 0.490 rg /F2 7.2 Tf 1 0 0 1 530.00 17.00 Tm (4 / 8) Tj
+0.370 0.420 0.490 rg /F2 7.2 Tf 1 0 0 1 530.00 17.00 Tm (5 / 8) Tj
+0.370 0.420 0.490 rg /F2 7.2 Tf 1 0 0 1 530.00 17.00 Tm (6 / 8) Tj
+0.370 0.420 0.490 rg /F2 7.2 Tf 1 0 0 1 530.00 17.00 Tm (7 / 8) Tj
+0.370 0.420 0.490 rg /F2 7.2 Tf 1 0 0 1 530.00 17.00 Tm (8 / 8) Tj
+Q
+endstream
+endobj
+20 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 19 0 R >>
+endobj
+xref
+0 21
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000169 00000 n 
+0000000239 00000 n 
+0000000314 00000 n 
+0000006137 00000 n 
+0000006273 00000 n 
+0000010680 00000 n 
+0000010816 00000 n 
+0000017421 00000 n 
+0000017558 00000 n 
+0000023811 00000 n 
+0000023949 00000 n 
+0000028070 00000 n 
+0000028208 00000 n 
+0000034062 00000 n 
+0000034200 00000 n 
+0000042188 00000 n 
+0000042326 00000 n 
+0000049230 00000 n 
+trailer
+<< /Size 21 /Root 1 0 R >>
+startxref
+49368
+%%EOF
