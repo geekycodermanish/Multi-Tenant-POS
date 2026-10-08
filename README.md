@@ -14,7 +14,7 @@ I built a point-of-sale API for multiple merchants. A platform admin creates mer
 
 ## Installation and Setup
 
-Requirements: Node.js, npm, PostgreSQL, and Redis (optional).
+Requirements: Node.js, npm, PostgreSQL, and Redis.
 
 ```bash
 git clone https://github.com/geekycodermanish/Multi-Tenant-POS.git
