@@ -13,7 +13,8 @@ import * as path from 'path';
 dotenv.config();
 
 import {
-  Merchant, Store, User, Product, Inventory, UserRole,
+  Merchant, Store, User, Product, Inventory, Sale, SaleItem, Payment,
+  IdempotencyKey, UserRole,
 } from '../entities';
 
 const sequelize = new Sequelize({
@@ -23,7 +24,7 @@ const sequelize = new Sequelize({
   username: process.env.DB_USERNAME || 'postgres',
   password: process.env.DB_PASSWORD || 'postgres',
   database: process.env.DB_NAME || 'swazei_pos',
-  models: [Merchant, Store, User, Product, Inventory],
+  models: [Merchant, Store, User, Product, Inventory, Sale, SaleItem, Payment, IdempotencyKey],
   logging: false,
 });
 

@@ -1,4 +1,4 @@
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, ConflictException } from '@nestjs/common';
 import { Transaction } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import {
@@ -261,8 +261,21 @@ describe('SalesService.createSale', () => {
     expect(paymentProvider.charge).toHaveBeenCalledTimes(1);
   });
 
+  it('retries a deadlock that happens before payment (claim insert) and charges only once', async () => {
+    idempotencyModel.create
+      .mockRejectedValueOnce({ original: { code: '40P01' } })
+      .mockResolvedValueOnce({});
+
+    await expect(
+      service.createSale('store-1', makeDto([{ productId: 'A', quantity: 1 }]), user),
+    ).resolves.toMatchObject({ billNumber: 'BILL-00000001' });
+
+    expect(sequelize.transaction).toHaveBeenCalledTimes(2);
+    expect(paymentProvider.charge).toHaveBeenCalledTimes(1);
+  });
+
   it('does not retry a deadlock after payment was attempted', async () => {
-    idempotencyModel.create.mockRejectedValueOnce({ original: { code: '40P01' } });
+    paymentModel.create.mockRejectedValueOnce({ original: { code: '40P01' } });
 
     await expect(
       service.createSale('store-1', makeDto([{ productId: 'A', quantity: 1 }]), user),
@@ -270,6 +283,19 @@ describe('SalesService.createSale', () => {
 
     expect(sequelize.transaction).toHaveBeenCalledTimes(1);
     expect(paymentProvider.charge).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not retry 23505', async () => {
+    idempotencyModel.create.mockRejectedValueOnce({
+      original: { code: '23505', constraint: 'UQ_idempotency_key_store' },
+    });
+
+    await expect(
+      service.createSale('store-1', makeDto([{ productId: 'A', quantity: 1 }]), user),
+    ).rejects.toBeInstanceOf(ConflictException);
+
+    expect(sequelize.transaction).toHaveBeenCalledTimes(1);
+    expect(paymentProvider.charge).not.toHaveBeenCalled();
   });
 
   it('still rejects failed payment so the transaction callback rolls back inventory', async () => {

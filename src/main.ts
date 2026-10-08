@@ -1,30 +1,20 @@
-import { NestFactory, Reflector } from '@nestjs/core';
-import { ValidationPipe, Logger } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
-import { AllExceptionsFilter } from './common/filters/http-exception.filter';
+import { applyAppSetup } from './app.setup';
 import { HealthService } from './common/services/health.service';
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
-  
+
   try {
     logger.log('🚀 Starting Swazei Multi-Tenant POS System...');
-    
+
     const app = await NestFactory.create(AppModule, {
-      logger: ['log', 'error', 'warn', 'debug', 'verbose']
+      logger: ['log', 'error', 'warn', 'debug', 'verbose'],
     });
 
-    // Global validation — strips unknown fields, transforms types
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        transform: true,
-      }),
-    );
-
-    // Global exception filter
-    app.useGlobalFilters(new AllExceptionsFilter());
+    applyAppSetup(app);
 
     const port = process.env.PORT || 3000;
     await app.listen(port);
