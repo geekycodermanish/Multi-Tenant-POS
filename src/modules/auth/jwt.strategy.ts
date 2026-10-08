@@ -9,7 +9,7 @@ export interface JwtPayload {
   sub: string;       // userId
   email: string;
   role: string;
-  merchantId: string;
+  merchantId: string | null;
   storeId: string | null;
 }
 

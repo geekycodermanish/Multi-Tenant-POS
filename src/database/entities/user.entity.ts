@@ -16,6 +16,7 @@ import { Merchant } from './merchant.entity';
 import { Store } from './store.entity';
 
 export enum UserRole {
+  PLATFORM_ADMIN = 'platform_admin', // provisions merchants only
   MERCHANT_ADMIN = 'merchant_admin', // manages all stores under a merchant
   STORE_STAFF = 'store_staff',       // operates POS in a single store
 }
@@ -51,8 +52,8 @@ export class User extends Model {
 
   @Index
   @ForeignKey(() => Merchant)
-  @Column({ type: DataType.UUID, allowNull: false })
-  merchantId: string;
+  @Column({ type: DataType.UUID, allowNull: true })
+  merchantId: string | null;
 
   @BelongsTo(() => Merchant, { foreignKey: 'merchantId', onDelete: 'CASCADE' })
   merchant: Merchant;

@@ -64,11 +64,10 @@ describe('UsersService', () => {
       name: 'Staff',
       email: 'staff@example.com',
       password: 'password123',
-      role: UserRole.STORE_STAFF,
       storeId: 'foreign-store',
     };
 
-    await expect(service.create(dto, { merchantId } as User)).rejects.toBeInstanceOf(
+    await expect(service.create(dto, { merchantId, role: UserRole.MERCHANT_ADMIN } as User)).rejects.toBeInstanceOf(
       NotFoundException,
     );
     expect(storeModel.findOne).toHaveBeenCalledWith({
@@ -82,31 +81,33 @@ describe('UsersService', () => {
       name: 'Staff',
       email: 'staff@example.com',
       password: 'password123',
-      role: UserRole.STORE_STAFF,
+      storeId: '',
     };
 
-    await expect(service.create(dto, { merchantId } as User)).rejects.toBeInstanceOf(
+    await expect(service.create(dto, { merchantId, role: UserRole.MERCHANT_ADMIN } as User)).rejects.toBeInstanceOf(
       BadRequestException,
     );
     expect(userModel.create).not.toHaveBeenCalled();
   });
 
-  it('uses the caller merchant even if the service receives a different body merchantId', async () => {
+  it('creates only store staff in the caller merchant, ignoring body role and tenant fields', async () => {
     const dto = {
       name: 'Staff',
       email: 'staff@example.com',
       password: 'password123',
       role: UserRole.MERCHANT_ADMIN,
       merchantId: 'merchant-b',
+      storeId,
     } as CreateUserDto;
 
-    await service.create(dto, { merchantId } as User);
+    await service.create(dto, { merchantId, role: UserRole.MERCHANT_ADMIN } as User);
 
     expect(userModel.create).toHaveBeenCalledWith(
-      expect.objectContaining({ merchantId }),
-    );
-    expect(userModel.create).toHaveBeenCalledWith(
-      expect.not.objectContaining({ merchantId: 'merchant-b' }),
+      expect.objectContaining({
+        role: UserRole.STORE_STAFF,
+        merchantId,
+        storeId,
+      }),
     );
   });
 
@@ -122,9 +123,9 @@ describe('UsersService', () => {
         name: 'Staff',
         email: 'staff@example.com',
         password: 'password123',
-        role: UserRole.MERCHANT_ADMIN,
+        storeId,
       },
-      { merchantId } as User,
+      { merchantId, role: UserRole.MERCHANT_ADMIN } as User,
     );
     const listed = await service.findAll(merchantId);
     const fetched = await service.findOne('user-1', merchantId);

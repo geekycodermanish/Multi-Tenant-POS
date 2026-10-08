@@ -7,4 +7,15 @@ export class CreateMerchantDto {
 
   @IsEmail()
   email: string;
+
+  @IsString()
+  @MinLength(2)
+  adminName: string;
+
+  @IsEmail()
+  adminEmail: string;
+
+  @IsString()
+  @MinLength(8)
+  adminPassword: string;
 }

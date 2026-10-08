@@ -31,8 +31,42 @@ const sequelize = new Sequelize({
 const hash = (pw: string) => bcrypt.hash(pw, 10);
 
 async function seed() {
+  const platformAdminEmail = process.env.PLATFORM_ADMIN_EMAIL?.trim();
+  const platformAdminPassword = process.env.PLATFORM_ADMIN_PASSWORD;
+  if (!platformAdminEmail || !platformAdminPassword || platformAdminPassword.length < 8) {
+    throw new Error(
+      'Set PLATFORM_ADMIN_EMAIL and PLATFORM_ADMIN_PASSWORD (at least 8 characters) before running the seed.',
+    );
+  }
+
   await sequelize.authenticate();
   console.log('Connected to DB');
+
+  const existingPlatformAdmin = await User.findOne({
+    where: { email: platformAdminEmail },
+  });
+  if (existingPlatformAdmin) {
+    if (existingPlatformAdmin.role !== UserRole.PLATFORM_ADMIN) {
+      throw new Error('PLATFORM_ADMIN_EMAIL is already assigned to a non-platform user.');
+    }
+  } else {
+    await User.create({
+      name: 'Platform Admin',
+      email: platformAdminEmail,
+      password: await hash(platformAdminPassword),
+      role: UserRole.PLATFORM_ADMIN,
+      merchantId: null,
+    });
+  }
+
+  const existingDemoMerchant = await Merchant.findOne({
+    where: { name: 'Merchant A' },
+  });
+  if (existingDemoMerchant) {
+    console.log('Platform admin ready; demo merchant fixtures already exist, skipping them.');
+    await sequelize.close();
+    return;
+  }
 
   // ── Merchant A ────────────────────────────────────────────────────────────
   const merchantA = await Merchant.create({
@@ -145,6 +179,9 @@ Merchant B
   Admin:  admin.b@example.com  / password123
   Staff:  staff.b1@example.com / password123
   Store B1 ID: ${storeB1.id}
+
+Platform admin
+  Admin: ${platformAdminEmail} / password supplied through PLATFORM_ADMIN_PASSWORD
 `);
 
   await sequelize.close();

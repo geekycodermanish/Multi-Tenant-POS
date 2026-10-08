@@ -3,6 +3,7 @@ import {
   ConflictException,
   BadRequestException,
   NotFoundException,
+  ForbiddenException,
 } from '@nestjs/common';
 import { InjectConnection, InjectModel } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize-typescript';
@@ -18,8 +19,11 @@ export class UsersService {
   ) {}
 
   async create(dto: CreateUserDto, adminUser: User): Promise<Omit<User, 'password'>> {
-    if (dto.role !== UserRole.MERCHANT_ADMIN && !dto.storeId) {
-      throw new BadRequestException('storeId is required for store-level roles');
+    if (adminUser.role !== UserRole.MERCHANT_ADMIN || !adminUser.merchantId) {
+      throw new ForbiddenException('Only merchant admins can create store staff');
+    }
+    if (!dto.storeId) {
+      throw new BadRequestException('storeId is required for store staff');
     }
 
     if (dto.storeId) {
@@ -34,10 +38,13 @@ export class UsersService {
 
     const hashed = await bcrypt.hash(dto.password, 10);
     const user = await this.userModel.create({
-      ...dto,
+      name: dto.name,
+      email: dto.email,
       password: hashed,
+      role: UserRole.STORE_STAFF,
       merchantId: adminUser.merchantId,
-    } as any);
+      storeId: dto.storeId,
+    });
 
     return this.withoutPassword(user);
   }

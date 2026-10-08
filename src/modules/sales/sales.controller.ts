@@ -13,11 +13,14 @@ import {
 import { SalesService } from './sales.service';
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
+import { Roles } from '../../common/decorators/roles.decorator';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
-import { User } from '../../database/entities';
+import { User, UserRole } from '../../database/entities';
 
 @Controller('stores/:storeId/sales')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles(UserRole.MERCHANT_ADMIN, UserRole.STORE_STAFF)
 export class SalesController {
   constructor(private salesService: SalesService) {}
 
