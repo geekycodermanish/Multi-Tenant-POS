@@ -1,64 +1,193 @@
 {
   "info": {
     "name": "Swazei Multi-Tenant POS - Platform to Store Flow",
-    "description": "Run folders from top to bottom. The platform admin creates merchants and their first admins; merchant admins create stores, staff, products and stock; store staff perform POS sales.",
+    "description": "Platform onboarding and merchant/store-scoped operations. Each merchant and each store has its own folder in every applicable section.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
-    { "key": "baseUrl", "value": "http://localhost:3000" },
-    { "key": "platformAdminEmail", "value": "admin@swazei.com" },
-    { "key": "platformAdminPassword", "value": "" },
-    { "key": "platformAdminToken", "value": "" },
-    { "key": "flowPassword", "value": "FlowDemo123!" },
-    { "key": "runId", "value": "" },
-    { "key": "merchantAId", "value": "" },
-    { "key": "merchantBId", "value": "" },
-    { "key": "merchantAdminAEmail", "value": "" },
-    { "key": "merchantAdminBEmail", "value": "" },
-    { "key": "merchantAdminAToken", "value": "" },
-    { "key": "merchantAdminBToken", "value": "" },
-    { "key": "storeA1Id", "value": "" },
-    { "key": "storeA2Id", "value": "" },
-    { "key": "storeB1Id", "value": "" },
-    { "key": "storeB2Id", "value": "" },
-    { "key": "staffA1Email", "value": "" },
-    { "key": "staffA2Email", "value": "" },
-    { "key": "staffB1Email", "value": "" },
-    { "key": "staffB2Email", "value": "" },
-    { "key": "staffA1UserId", "value": "" },
-    { "key": "staffA1Token", "value": "" },
-    { "key": "staffA2Token", "value": "" },
-    { "key": "staffB1Token", "value": "" },
-    { "key": "staffB2Token", "value": "" },
-    { "key": "productA1Id", "value": "" },
-    { "key": "productA2Id", "value": "" },
-    { "key": "productB1Id", "value": "" },
-    { "key": "productB2Id", "value": "" },
-    { "key": "saleId", "value": "" },
-    { "key": "billNumber", "value": "" },
-    { "key": "idempotencyKey", "value": "" },
-    { "key": "stockBefore", "value": "" }
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "platformAdminEmail",
+      "value": "admin@swazei.com"
+    },
+    {
+      "key": "platformAdminPassword",
+      "value": ""
+    },
+    {
+      "key": "platformAdminToken",
+      "value": ""
+    },
+    {
+      "key": "flowPassword",
+      "value": "FlowDemo123!"
+    },
+    {
+      "key": "runId",
+      "value": ""
+    },
+    {
+      "key": "merchantAId",
+      "value": ""
+    },
+    {
+      "key": "merchantBId",
+      "value": ""
+    },
+    {
+      "key": "merchantAdminAEmail",
+      "value": ""
+    },
+    {
+      "key": "merchantAdminBEmail",
+      "value": ""
+    },
+    {
+      "key": "merchantAdminAToken",
+      "value": ""
+    },
+    {
+      "key": "merchantAdminBToken",
+      "value": ""
+    },
+    {
+      "key": "storeA1Id",
+      "value": ""
+    },
+    {
+      "key": "storeA2Id",
+      "value": ""
+    },
+    {
+      "key": "storeB1Id",
+      "value": ""
+    },
+    {
+      "key": "storeB2Id",
+      "value": ""
+    },
+    {
+      "key": "staffA1Email",
+      "value": ""
+    },
+    {
+      "key": "staffA2Email",
+      "value": ""
+    },
+    {
+      "key": "staffB1Email",
+      "value": ""
+    },
+    {
+      "key": "staffB2Email",
+      "value": ""
+    },
+    {
+      "key": "staffA1UserId",
+      "value": ""
+    },
+    {
+      "key": "staffA1Token",
+      "value": ""
+    },
+    {
+      "key": "staffA2Token",
+      "value": ""
+    },
+    {
+      "key": "staffB1Token",
+      "value": ""
+    },
+    {
+      "key": "staffB2Token",
+      "value": ""
+    },
+    {
+      "key": "productA1Id",
+      "value": ""
+    },
+    {
+      "key": "productA2Id",
+      "value": ""
+    },
+    {
+      "key": "productB1Id",
+      "value": ""
+    },
+    {
+      "key": "productB2Id",
+      "value": ""
+    },
+    {
+      "key": "saleId",
+      "value": ""
+    },
+    {
+      "key": "billNumber",
+      "value": ""
+    },
+    {
+      "key": "idempotencyKey",
+      "value": ""
+    },
+    {
+      "key": "stockBefore",
+      "value": ""
+    },
+    {
+      "key": "staffA2UserId",
+      "value": ""
+    },
+    {
+      "key": "staffB1UserId",
+      "value": ""
+    },
+    {
+      "key": "staffB2UserId",
+      "value": ""
+    }
   ],
   "item": [
     {
       "name": "Auth",
       "item": [
         {
-          "name": "1 - Login platform admin",
+          "name": "Login platform admin",
           "request": {
             "method": "POST",
             "description": "Set platformAdminEmail and platformAdminPassword to PLATFORM_ADMIN_EMAIL and PLATFORM_ADMIN_PASSWORD from the server .env, then log in.",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\"email\":\"{{platformAdminEmail}}\",\"password\":\"{{platformAdminPassword}}\"}" },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"{{platformAdminEmail}}\",\"password\":\"{{platformAdminPassword}}\"}"
+            },
             "url": "{{baseUrl}}/auth/login",
-            "auth": { "type": "noauth" }
+            "auth": {
+              "type": "noauth"
+            }
           },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-            "pm.test('returns 200', () => pm.response.to.have.status(200));",
-            "const body = pm.response.json();",
-            "pm.test('authenticates the platform admin', () => { pm.expect(body.user.role).to.eql('platform_admin'); pm.expect(body.user.merchantId).to.eql(null); });",
-            "pm.collectionVariables.set('platformAdminToken', body.accessToken);"
-          ] } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test('authenticates the platform admin', () => { pm.expect(body.user.role).to.eql('platform_admin'); pm.expect(body.user.merchantId).to.eql(null); });",
+                  "pm.collectionVariables.set('platformAdminToken', body.accessToken);"
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -66,208 +195,2871 @@
       "name": "Merchants",
       "item": [
         {
-          "name": "1 - Create Merchant A and first merchant admin",
-          "request": {
-            "method": "POST",
-            "description": "Platform-admin operation. Creates Merchant A and its first merchant admin in one transaction.",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\"name\":\"Flow Merchant A {{runId}}\",\"email\":\"contact-a-{{runId}}@example.com\",\"adminName\":\"Merchant A Owner\",\"adminEmail\":\"owner-a-{{runId}}@example.com\",\"adminPassword\":\"{{flowPassword}}\"}" },
-            "url": "{{baseUrl}}/merchants",
-            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{platformAdminToken}}", "type": "string" }] }
-          },
-          "event": [
-            { "listen": "prerequest", "script": { "type": "text/javascript", "exec": ["pm.collectionVariables.set('runId', Date.now().toString());"] } },
-            { "listen": "test", "script": { "type": "text/javascript", "exec": [
-              "pm.test('returns 201', () => pm.response.to.have.status(201));",
-              "const body = pm.response.json();",
-              "pm.test('creates merchant and its admin', () => { pm.expect(body.merchant.id).to.be.a('string'); pm.expect(body.admin.role).to.eql('merchant_admin'); pm.expect(body.admin.merchantId).to.eql(body.merchant.id); pm.expect(body.admin).not.to.have.property('password'); });",
-              "pm.collectionVariables.set('merchantAId', body.merchant.id);",
-              "pm.collectionVariables.set('merchantAdminAEmail', body.admin.email);"
-            ] } }
+          "name": "Merchant A",
+          "item": [
+            {
+              "name": "Create Merchant A and first merchant admin",
+              "request": {
+                "method": "POST",
+                "description": "Platform-admin operation. Creates Merchant A and its first merchant admin in one transaction.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Flow Merchant A {{runId}}\",\"email\":\"contact-a-{{runId}}@example.com\",\"adminName\":\"Merchant A Owner\",\"adminEmail\":\"owner-a-{{runId}}@example.com\",\"adminPassword\":\"{{flowPassword}}\"}"
+                },
+                "url": "{{baseUrl}}/merchants",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{platformAdminToken}}",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.collectionVariables.set('runId', Date.now().toString());"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                      "const body = pm.response.json();",
+                      "pm.test('creates merchant and its admin', () => { pm.expect(body.merchant.id).to.be.a('string'); pm.expect(body.admin.role).to.eql('merchant_admin'); pm.expect(body.admin.merchantId).to.eql(body.merchant.id); pm.expect(body.admin).not.to.have.property('password'); });",
+                      "pm.collectionVariables.set('merchantAId', body.merchant.id);",
+                      "pm.collectionVariables.set('merchantAdminAEmail', body.admin.email);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Login Merchant A admin",
+              "request": {
+                "method": "POST",
+                "description": "Log in the first admin created for Merchant A.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"email\":\"{{merchantAdminAEmail}}\",\"password\":\"{{flowPassword}}\"}"
+                },
+                "url": "{{baseUrl}}/auth/login",
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                      "const body = pm.response.json();",
+                      "pm.test('returns Merchant A admin', () => { pm.expect(body.user.role).to.eql('merchant_admin'); pm.expect(body.user.merchantId).to.eql(pm.collectionVariables.get('merchantAId')); });",
+                      "pm.collectionVariables.set('merchantAdminAToken', body.accessToken);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "List own merchant",
+              "request": {
+                "method": "GET",
+                "description": "A tenant admin can list only its own merchant.",
+                "header": [],
+                "url": "{{baseUrl}}/merchants",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{merchantAdminAToken}}",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                      "pm.test('only lists Merchant A', () => { const rows = pm.response.json(); pm.expect(rows).to.have.length(1); pm.expect(rows[0].id).to.eql(pm.collectionVariables.get('merchantAId')); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Get own merchant",
+              "request": {
+                "method": "GET",
+                "description": "Read the merchant belonging to the authenticated admin.",
+                "header": [],
+                "url": "{{baseUrl}}/merchants/{{merchantAId}}",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{merchantAdminAToken}}",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                      "pm.test('returns Merchant A', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('merchantAId')));"
+                    ]
+                  }
+                }
+              ]
+            }
           ]
         },
         {
-          "name": "2 - Login Merchant A admin",
-          "request": {
-            "method": "POST",
-            "description": "Log in the first admin created for Merchant A.",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\"email\":\"{{merchantAdminAEmail}}\",\"password\":\"{{flowPassword}}\"}" },
-            "url": "{{baseUrl}}/auth/login",
-            "auth": { "type": "noauth" }
-          },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-            "pm.test('returns 200', () => pm.response.to.have.status(200));",
-            "const body = pm.response.json();",
-            "pm.test('returns Merchant A admin', () => { pm.expect(body.user.role).to.eql('merchant_admin'); pm.expect(body.user.merchantId).to.eql(pm.collectionVariables.get('merchantAId')); });",
-            "pm.collectionVariables.set('merchantAdminAToken', body.accessToken);"
-          ] } }]
-        },
-        {
-          "name": "3 - Create Merchant B and first merchant admin",
-          "request": {
-            "method": "POST",
-            "description": "Platform-admin operation. Creates a separate merchant and its first admin.",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\"name\":\"Flow Merchant B {{runId}}\",\"email\":\"contact-b-{{runId}}@example.com\",\"adminName\":\"Merchant B Owner\",\"adminEmail\":\"owner-b-{{runId}}@example.com\",\"adminPassword\":\"{{flowPassword}}\"}" },
-            "url": "{{baseUrl}}/merchants",
-            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{platformAdminToken}}", "type": "string" }] }
-          },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-            "pm.test('returns 201', () => pm.response.to.have.status(201));",
-            "const body = pm.response.json();",
-            "pm.test('creates a distinct Merchant B admin', () => { pm.expect(body.merchant.id).not.to.eql(pm.collectionVariables.get('merchantAId')); pm.expect(body.admin.role).to.eql('merchant_admin'); pm.expect(body.admin.merchantId).to.eql(body.merchant.id); });",
-            "pm.collectionVariables.set('merchantBId', body.merchant.id);",
-            "pm.collectionVariables.set('merchantAdminBEmail', body.admin.email);"
-          ] } }]
-        },
-        {
-          "name": "4 - Login Merchant B admin",
-          "request": {
-            "method": "POST",
-            "description": "Log in the first admin created for Merchant B.",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\"email\":\"{{merchantAdminBEmail}}\",\"password\":\"{{flowPassword}}\"}" },
-            "url": "{{baseUrl}}/auth/login",
-            "auth": { "type": "noauth" }
-          },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-            "pm.test('returns 200', () => pm.response.to.have.status(200));",
-            "const body = pm.response.json();",
-            "pm.test('returns Merchant B admin', () => { pm.expect(body.user.role).to.eql('merchant_admin'); pm.expect(body.user.merchantId).to.eql(pm.collectionVariables.get('merchantBId')); });",
-            "pm.collectionVariables.set('merchantAdminBToken', body.accessToken);"
-          ] } }]
-        },
-        {
-          "name": "5 - List own merchant",
-          "request": {
-            "method": "GET",
-            "description": "A tenant admin can list only its own merchant.",
-            "header": [],
-            "url": "{{baseUrl}}/merchants",
-            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] }
-          },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-            "pm.test('returns 200', () => pm.response.to.have.status(200));",
-            "pm.test('only lists Merchant A', () => { const rows = pm.response.json(); pm.expect(rows).to.have.length(1); pm.expect(rows[0].id).to.eql(pm.collectionVariables.get('merchantAId')); });"
-          ] } }]
-        },
-        {
-          "name": "6 - Get own merchant",
-          "request": {
-            "method": "GET",
-            "description": "Read the merchant belonging to the authenticated admin.",
-            "header": [],
-            "url": "{{baseUrl}}/merchants/{{merchantAId}}",
-            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] }
-          },
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-            "pm.test('returns 200', () => pm.response.to.have.status(200));",
-            "pm.test('returns Merchant A', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('merchantAId')));"
-          ] } }]
+          "name": "Merchant B",
+          "item": [
+            {
+              "name": "Create Merchant B and first merchant admin",
+              "request": {
+                "method": "POST",
+                "description": "Platform-admin operation. Creates a separate merchant and its first admin.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Flow Merchant B {{runId}}\",\"email\":\"contact-b-{{runId}}@example.com\",\"adminName\":\"Merchant B Owner\",\"adminEmail\":\"owner-b-{{runId}}@example.com\",\"adminPassword\":\"{{flowPassword}}\"}"
+                },
+                "url": "{{baseUrl}}/merchants",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{platformAdminToken}}",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                      "const body = pm.response.json();",
+                      "pm.test('creates a distinct Merchant B admin', () => { pm.expect(body.merchant.id).not.to.eql(pm.collectionVariables.get('merchantAId')); pm.expect(body.admin.role).to.eql('merchant_admin'); pm.expect(body.admin.merchantId).to.eql(body.merchant.id); });",
+                      "pm.collectionVariables.set('merchantBId', body.merchant.id);",
+                      "pm.collectionVariables.set('merchantAdminBEmail', body.admin.email);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Login Merchant B admin",
+              "request": {
+                "method": "POST",
+                "description": "Log in the first admin created for Merchant B.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"email\":\"{{merchantAdminBEmail}}\",\"password\":\"{{flowPassword}}\"}"
+                },
+                "url": "{{baseUrl}}/auth/login",
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                      "const body = pm.response.json();",
+                      "pm.test('returns Merchant B admin', () => { pm.expect(body.user.role).to.eql('merchant_admin'); pm.expect(body.user.merchantId).to.eql(pm.collectionVariables.get('merchantBId')); });",
+                      "pm.collectionVariables.set('merchantAdminBToken', body.accessToken);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "List own merchant",
+              "request": {
+                "method": "GET",
+                "description": "A tenant admin can list only its own merchant.",
+                "header": [],
+                "url": "{{baseUrl}}/merchants",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{merchantAdminBToken}}",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                      "pm.test('only lists Merchant B', () => { const rows = pm.response.json(); pm.expect(rows).to.have.length(1); pm.expect(rows[0].id).to.eql(pm.collectionVariables.get('merchantBId')); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Get own merchant",
+              "request": {
+                "method": "GET",
+                "description": "Read the merchant belonging to the authenticated admin.",
+                "header": [],
+                "url": "{{baseUrl}}/merchants/{{merchantBId}}",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{merchantAdminBToken}}",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                      "pm.test('returns Merchant B', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('merchantBId')));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "name": "Stores",
       "item": [
-        { "name": "1 - Create Store A1", "request": { "method": "POST", "description": "Merchant A admin creates Store A1.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Store A1 {{runId}}\",\"address\":\"1 Example Road\"}" }, "url": "{{baseUrl}}/stores", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 201', () => pm.response.to.have.status(201));", "const body = pm.response.json(); pm.test('store belongs to Merchant A', () => pm.expect(body.merchantId).to.eql(pm.collectionVariables.get('merchantAId')));", "pm.collectionVariables.set('storeA1Id', body.id);"] } }] },
-        { "name": "2 - Create Store A2", "request": { "method": "POST", "description": "Merchant A admin creates its second store.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Store A2 {{runId}}\",\"address\":\"2 Example Road\"}" }, "url": "{{baseUrl}}/stores", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 201', () => pm.response.to.have.status(201));", "const body = pm.response.json(); pm.test('store belongs to Merchant A', () => pm.expect(body.merchantId).to.eql(pm.collectionVariables.get('merchantAId')));", "pm.collectionVariables.set('storeA2Id', body.id);"] } }] },
-        { "name": "3 - Create Store B1", "request": { "method": "POST", "description": "Merchant B admin creates Store B1, isolated from Merchant A.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Store B1 {{runId}}\",\"address\":\"3 Example Road\"}" }, "url": "{{baseUrl}}/stores", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminBToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 201', () => pm.response.to.have.status(201));", "const body = pm.response.json(); pm.test('store belongs to Merchant B', () => pm.expect(body.merchantId).to.eql(pm.collectionVariables.get('merchantBId')));", "pm.collectionVariables.set('storeB1Id', body.id);"] } }] },
-        { "name": "4 - Create Store B2", "request": { "method": "POST", "description": "Merchant B admin creates its second store.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Store B2 {{runId}}\",\"address\":\"4 Example Road\"}" }, "url": "{{baseUrl}}/stores", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminBToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 201', () => pm.response.to.have.status(201));", "const body = pm.response.json(); pm.test('store belongs to Merchant B', () => pm.expect(body.merchantId).to.eql(pm.collectionVariables.get('merchantBId')));", "pm.collectionVariables.set('storeB2Id', body.id);"] } }] },
-        { "name": "5 - List Merchant A stores", "request": { "method": "GET", "description": "Merchant A admin sees both of its stores.", "header": [], "url": "{{baseUrl}}/stores", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('lists only the two Merchant A stores', () => { const rows = pm.response.json(); pm.expect(rows).to.have.length(2); pm.expect(rows.map(x => x.id)).to.include(pm.collectionVariables.get('storeA1Id')); pm.expect(rows.map(x => x.id)).to.include(pm.collectionVariables.get('storeA2Id')); });"] } }] },
-        { "name": "6 - Get Store A1", "request": { "method": "GET", "description": "Read Store A1 as its merchant admin.", "header": [], "url": "{{baseUrl}}/stores/{{storeA1Id}}", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('returns Store A1', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('storeA1Id')));"] } }] }
+        {
+          "name": "Merchant A",
+          "item": [
+            {
+              "name": "Store A1",
+              "item": [
+                {
+                  "name": "Create Store A1",
+                  "request": {
+                    "method": "POST",
+                    "description": "Merchant A admin creates Store A1.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Store A1 {{runId}}\",\"address\":\"1 Example Road\"}"
+                    },
+                    "url": "{{baseUrl}}/stores",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json(); pm.test('store belongs to Merchant A', () => pm.expect(body.merchantId).to.eql(pm.collectionVariables.get('merchantAId')));",
+                          "pm.collectionVariables.set('storeA1Id', body.id);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get Store A1",
+                  "request": {
+                    "method": "GET",
+                    "description": "Read Store A1 as its merchant admin.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA1Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns Store A1', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('storeA1Id')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Store A2",
+              "item": [
+                {
+                  "name": "Create Store A2",
+                  "request": {
+                    "method": "POST",
+                    "description": "Merchant A admin creates its second store.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Store A2 {{runId}}\",\"address\":\"2 Example Road\"}"
+                    },
+                    "url": "{{baseUrl}}/stores",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json(); pm.test('store belongs to Merchant A', () => pm.expect(body.merchantId).to.eql(pm.collectionVariables.get('merchantAId')));",
+                          "pm.collectionVariables.set('storeA2Id', body.id);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get Store A2",
+                  "request": {
+                    "method": "GET",
+                    "description": "Read Store A2 as its merchant admin.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA2Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns Store A2', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('storeA2Id')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "List Merchant A stores",
+              "request": {
+                "method": "GET",
+                "description": "Merchant A admin sees both of its stores.",
+                "header": [],
+                "url": "{{baseUrl}}/stores",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{merchantAdminAToken}}",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                      "pm.test('lists only the two Merchant A stores', () => { const rows = pm.response.json(); pm.expect(rows).to.have.length(2); pm.expect(rows.map(x => x.id)).to.include(pm.collectionVariables.get('storeA1Id')); pm.expect(rows.map(x => x.id)).to.include(pm.collectionVariables.get('storeA2Id')); });"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Merchant B",
+          "item": [
+            {
+              "name": "Store B1",
+              "item": [
+                {
+                  "name": "Create Store B1",
+                  "request": {
+                    "method": "POST",
+                    "description": "Merchant B admin creates Store B1, isolated from Merchant A.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Store B1 {{runId}}\",\"address\":\"3 Example Road\"}"
+                    },
+                    "url": "{{baseUrl}}/stores",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json(); pm.test('store belongs to Merchant B', () => pm.expect(body.merchantId).to.eql(pm.collectionVariables.get('merchantBId')));",
+                          "pm.collectionVariables.set('storeB1Id', body.id);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get Store B1",
+                  "request": {
+                    "method": "GET",
+                    "description": "Read Store B1 as its merchant admin.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB1Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns Store B1', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('storeB1Id')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Store B2",
+              "item": [
+                {
+                  "name": "Create Store B2",
+                  "request": {
+                    "method": "POST",
+                    "description": "Merchant B admin creates its second store.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Store B2 {{runId}}\",\"address\":\"4 Example Road\"}"
+                    },
+                    "url": "{{baseUrl}}/stores",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json(); pm.test('store belongs to Merchant B', () => pm.expect(body.merchantId).to.eql(pm.collectionVariables.get('merchantBId')));",
+                          "pm.collectionVariables.set('storeB2Id', body.id);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get Store B2",
+                  "request": {
+                    "method": "GET",
+                    "description": "Read Store B2 as its merchant admin.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB2Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns Store B2', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('storeB2Id')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "List Merchant B stores",
+              "request": {
+                "method": "GET",
+                "description": "Merchant B admin sees both of its stores.",
+                "header": [],
+                "url": "{{baseUrl}}/stores",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{merchantAdminBToken}}",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                      "pm.test('lists only the two Merchant B stores', () => { const rows = pm.response.json(); pm.expect(rows).to.have.length(2); pm.expect(rows.map(x => x.id)).to.include(pm.collectionVariables.get('storeB1Id')); pm.expect(rows.map(x => x.id)).to.include(pm.collectionVariables.get('storeB2Id')); });"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
       "name": "Users",
       "item": [
-        { "name": "1 - Create Staff A1", "request": { "method": "POST", "description": "Merchant A admin creates staff assigned only to Store A1; the server assigns store_staff role.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Staff A1\",\"email\":\"staff-a1-{{runId}}@example.com\",\"password\":\"{{flowPassword}}\",\"storeId\":\"{{storeA1Id}}\"}" }, "url": "{{baseUrl}}/users", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 201', () => pm.response.to.have.status(201));", "const body = pm.response.json(); pm.test('staff is scoped to Store A1', () => { pm.expect(body.role).to.eql('store_staff'); pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeA1Id')); pm.expect(body.merchantId).to.eql(pm.collectionVariables.get('merchantAId')); });", "pm.collectionVariables.set('staffA1Email', body.email); pm.collectionVariables.set('staffA1UserId', body.id);"] } }] },
-        { "name": "2 - Create Staff A2", "request": { "method": "POST", "description": "Merchant A admin creates a separate staff account for Store A2.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Staff A2\",\"email\":\"staff-a2-{{runId}}@example.com\",\"password\":\"{{flowPassword}}\",\"storeId\":\"{{storeA2Id}}\"}" }, "url": "{{baseUrl}}/users", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 201', () => pm.response.to.have.status(201));", "const body = pm.response.json(); pm.test('staff is scoped to Store A2', () => { pm.expect(body.role).to.eql('store_staff'); pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeA2Id')); });", "pm.collectionVariables.set('staffA2Email', body.email);"] } }] },
-        { "name": "3 - Create Staff B1", "request": { "method": "POST", "description": "Merchant B admin creates staff assigned to Store B1.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Staff B1\",\"email\":\"staff-b1-{{runId}}@example.com\",\"password\":\"{{flowPassword}}\",\"storeId\":\"{{storeB1Id}}\"}" }, "url": "{{baseUrl}}/users", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminBToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 201', () => pm.response.to.have.status(201));", "const body = pm.response.json(); pm.test('staff is scoped to Store B1', () => { pm.expect(body.role).to.eql('store_staff'); pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeB1Id')); });", "pm.collectionVariables.set('staffB1Email', body.email);"] } }] },
-        { "name": "4 - Create Staff B2", "request": { "method": "POST", "description": "Merchant B admin creates staff assigned to Store B2.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Staff B2\",\"email\":\"staff-b2-{{runId}}@example.com\",\"password\":\"{{flowPassword}}\",\"storeId\":\"{{storeB2Id}}\"}" }, "url": "{{baseUrl}}/users", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminBToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 201', () => pm.response.to.have.status(201));", "const body = pm.response.json(); pm.test('staff is scoped to Store B2', () => { pm.expect(body.role).to.eql('store_staff'); pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeB2Id')); });", "pm.collectionVariables.set('staffB2Email', body.email);"] } }] },
-        { "name": "5 - List Merchant A users", "request": { "method": "GET", "description": "Merchant A admin lists only its owner account and two store staff.", "header": [], "url": "{{baseUrl}}/users", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('lists three Merchant A users', () => { const rows = pm.response.json(); pm.expect(rows).to.have.length(3); pm.expect(rows.every(x => x.merchantId === pm.collectionVariables.get('merchantAId'))).to.eql(true); });"] } }] },
-        { "name": "6 - Login Staff A1", "request": { "method": "POST", "description": "Log in as Store A1 staff and save the store-only token.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"email\":\"{{staffA1Email}}\",\"password\":\"{{flowPassword}}\"}" }, "url": "{{baseUrl}}/auth/login", "auth": { "type": "noauth" } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "const body = pm.response.json(); pm.test('login is Store A1 staff', () => { pm.expect(body.user.role).to.eql('store_staff'); pm.expect(body.user.storeId).to.eql(pm.collectionVariables.get('storeA1Id')); });", "pm.collectionVariables.set('staffA1Token', body.accessToken);"] } }] },
-        { "name": "7 - Login Staff A2", "request": { "method": "POST", "description": "Log in as Store A2 staff and save its separate token.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"email\":\"{{staffA2Email}}\",\"password\":\"{{flowPassword}}\"}" }, "url": "{{baseUrl}}/auth/login", "auth": { "type": "noauth" } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.collectionVariables.set('staffA2Token', pm.response.json().accessToken);"] } }] },
-        { "name": "8 - Login Staff B1", "request": { "method": "POST", "description": "Log in as Store B1 staff and save its separate token.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"email\":\"{{staffB1Email}}\",\"password\":\"{{flowPassword}}\"}" }, "url": "{{baseUrl}}/auth/login", "auth": { "type": "noauth" } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.collectionVariables.set('staffB1Token', pm.response.json().accessToken);"] } }] },
-        { "name": "9 - Login Staff B2", "request": { "method": "POST", "description": "Log in as Store B2 staff and save its separate token.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"email\":\"{{staffB2Email}}\",\"password\":\"{{flowPassword}}\"}" }, "url": "{{baseUrl}}/auth/login", "auth": { "type": "noauth" } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.collectionVariables.set('staffB2Token', pm.response.json().accessToken);"] } }] },
-        { "name": "10 - Get Staff A1", "request": { "method": "GET", "description": "Merchant A admin reads the created Store A1 staff record.", "header": [], "url": "{{baseUrl}}/users/{{staffA1UserId}}", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('returns Store A1 staff', () => pm.expect(pm.response.json().role).to.eql('store_staff'));"] } }] }
+        {
+          "name": "Merchant A",
+          "item": [
+            {
+              "name": "Store A1",
+              "item": [
+                {
+                  "name": "Create Staff A1",
+                  "request": {
+                    "method": "POST",
+                    "description": "Merchant A admin creates staff assigned only to Store A1; the server assigns store_staff role.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Staff A1\",\"email\":\"staff-a1-{{runId}}@example.com\",\"password\":\"{{flowPassword}}\",\"storeId\":\"{{storeA1Id}}\"}"
+                    },
+                    "url": "{{baseUrl}}/users",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json(); pm.test('staff is scoped to Store A1', () => { pm.expect(body.role).to.eql('store_staff'); pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeA1Id')); pm.expect(body.merchantId).to.eql(pm.collectionVariables.get('merchantAId')); });",
+                          "pm.collectionVariables.set('staffA1Email', body.email); pm.collectionVariables.set('staffA1UserId', body.id);",
+                          "pm.collectionVariables.set('staffA1UserId', body.id);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Login Staff A1",
+                  "request": {
+                    "method": "POST",
+                    "description": "Log in as Store A1 staff and save the store-only token.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"email\":\"{{staffA1Email}}\",\"password\":\"{{flowPassword}}\"}"
+                    },
+                    "url": "{{baseUrl}}/auth/login",
+                    "auth": {
+                      "type": "noauth"
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "const body = pm.response.json(); pm.test('login is Store A1 staff', () => { pm.expect(body.user.role).to.eql('store_staff'); pm.expect(body.user.storeId).to.eql(pm.collectionVariables.get('storeA1Id')); });",
+                          "pm.collectionVariables.set('staffA1Token', body.accessToken);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get Staff A1",
+                  "request": {
+                    "method": "GET",
+                    "description": "Merchant A admin reads the created Store A1 staff record.",
+                    "header": [],
+                    "url": "{{baseUrl}}/users/{{staffA1UserId}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns Store A1 staff', () => pm.expect(pm.response.json().role).to.eql('store_staff'));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Store A2",
+              "item": [
+                {
+                  "name": "Create Staff A2",
+                  "request": {
+                    "method": "POST",
+                    "description": "Merchant A admin creates a separate staff account for Store A2.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Staff A2\",\"email\":\"staff-a2-{{runId}}@example.com\",\"password\":\"{{flowPassword}}\",\"storeId\":\"{{storeA2Id}}\"}"
+                    },
+                    "url": "{{baseUrl}}/users",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json(); pm.test('staff is scoped to Store A2', () => { pm.expect(body.role).to.eql('store_staff'); pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeA2Id')); });",
+                          "pm.collectionVariables.set('staffA2Email', body.email);",
+                          "pm.collectionVariables.set('staffA2UserId', body.id);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Login Staff A2",
+                  "request": {
+                    "method": "POST",
+                    "description": "Log in as Store A2 staff and save its separate token.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"email\":\"{{staffA2Email}}\",\"password\":\"{{flowPassword}}\"}"
+                    },
+                    "url": "{{baseUrl}}/auth/login",
+                    "auth": {
+                      "type": "noauth"
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.collectionVariables.set('staffA2Token', pm.response.json().accessToken);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get staff - Store A2",
+                  "request": {
+                    "method": "GET",
+                    "description": "Read the staff account assigned to Store A2.",
+                    "header": [],
+                    "url": "{{baseUrl}}/users/{{staffA2UserId}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns staff for Store A2', () => pm.expect(pm.response.json().storeId).to.eql(pm.collectionVariables.get('storeA2Id')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "List Merchant A users",
+              "request": {
+                "method": "GET",
+                "description": "Merchant A admin lists only its owner account and two store staff.",
+                "header": [],
+                "url": "{{baseUrl}}/users",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{merchantAdminAToken}}",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                      "pm.test('lists three Merchant A users', () => { const rows = pm.response.json(); pm.expect(rows).to.have.length(3); pm.expect(rows.every(x => x.merchantId === pm.collectionVariables.get('merchantAId'))).to.eql(true); });"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Merchant B",
+          "item": [
+            {
+              "name": "Store B1",
+              "item": [
+                {
+                  "name": "Create Staff B1",
+                  "request": {
+                    "method": "POST",
+                    "description": "Merchant B admin creates staff assigned to Store B1.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Staff B1\",\"email\":\"staff-b1-{{runId}}@example.com\",\"password\":\"{{flowPassword}}\",\"storeId\":\"{{storeB1Id}}\"}"
+                    },
+                    "url": "{{baseUrl}}/users",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json(); pm.test('staff is scoped to Store B1', () => { pm.expect(body.role).to.eql('store_staff'); pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeB1Id')); });",
+                          "pm.collectionVariables.set('staffB1Email', body.email);",
+                          "pm.collectionVariables.set('staffB1UserId', body.id);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Login Staff B1",
+                  "request": {
+                    "method": "POST",
+                    "description": "Log in as Store B1 staff and save its separate token.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"email\":\"{{staffB1Email}}\",\"password\":\"{{flowPassword}}\"}"
+                    },
+                    "url": "{{baseUrl}}/auth/login",
+                    "auth": {
+                      "type": "noauth"
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.collectionVariables.set('staffB1Token', pm.response.json().accessToken);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get staff - Store B1",
+                  "request": {
+                    "method": "GET",
+                    "description": "Read the staff account assigned to Store B1.",
+                    "header": [],
+                    "url": "{{baseUrl}}/users/{{staffB1UserId}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns staff for Store B1', () => pm.expect(pm.response.json().storeId).to.eql(pm.collectionVariables.get('storeB1Id')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Store B2",
+              "item": [
+                {
+                  "name": "Create Staff B2",
+                  "request": {
+                    "method": "POST",
+                    "description": "Merchant B admin creates staff assigned to Store B2.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Staff B2\",\"email\":\"staff-b2-{{runId}}@example.com\",\"password\":\"{{flowPassword}}\",\"storeId\":\"{{storeB2Id}}\"}"
+                    },
+                    "url": "{{baseUrl}}/users",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json(); pm.test('staff is scoped to Store B2', () => { pm.expect(body.role).to.eql('store_staff'); pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeB2Id')); });",
+                          "pm.collectionVariables.set('staffB2Email', body.email);",
+                          "pm.collectionVariables.set('staffB2UserId', body.id);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Login Staff B2",
+                  "request": {
+                    "method": "POST",
+                    "description": "Log in as Store B2 staff and save its separate token.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"email\":\"{{staffB2Email}}\",\"password\":\"{{flowPassword}}\"}"
+                    },
+                    "url": "{{baseUrl}}/auth/login",
+                    "auth": {
+                      "type": "noauth"
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.collectionVariables.set('staffB2Token', pm.response.json().accessToken);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get staff - Store B2",
+                  "request": {
+                    "method": "GET",
+                    "description": "Read the staff account assigned to Store B2.",
+                    "header": [],
+                    "url": "{{baseUrl}}/users/{{staffB2UserId}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns staff for Store B2', () => pm.expect(pm.response.json().storeId).to.eql(pm.collectionVariables.get('storeB2Id')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "List Merchant B users",
+              "request": {
+                "method": "GET",
+                "description": "Merchant B admin lists only its owner account and two store staff.",
+                "header": [],
+                "url": "{{baseUrl}}/users",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{merchantAdminBToken}}",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                      "pm.test('lists Merchant B users', () => { const rows = pm.response.json(); pm.expect(rows).to.have.length(3); pm.expect(rows.every(x => x.merchantId === pm.collectionVariables.get('merchantBId'))).to.eql(true); });"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
       "name": "Products",
       "item": [
-        { "name": "1 - Create Product A1", "request": { "method": "POST", "description": "Merchant A admin creates a product in Store A1; inventory starts at zero.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Coffee A1 {{runId}}\",\"priceCents\":250,\"sku\":\"COFFEE-A1-{{runId}}\"}" }, "url": "{{baseUrl}}/stores/{{storeA1Id}}/products", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 201', () => pm.response.to.have.status(201));", "const body = pm.response.json(); pm.test('product belongs to Store A1', () => pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeA1Id')));", "pm.collectionVariables.set('productA1Id', body.id);"] } }] },
-        { "name": "2 - Create Product A2", "request": { "method": "POST", "description": "Merchant A admin creates a separate product in Store A2.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Tea A2 {{runId}}\",\"priceCents\":175,\"sku\":\"TEA-A2-{{runId}}\"}" }, "url": "{{baseUrl}}/stores/{{storeA2Id}}/products", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 201', () => pm.response.to.have.status(201));", "const body = pm.response.json(); pm.test('product belongs to Store A2', () => pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeA2Id')));", "pm.collectionVariables.set('productA2Id', body.id);"] } }] },
-        { "name": "3 - Create Product B1", "request": { "method": "POST", "description": "Merchant B admin creates a product in Store B1.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Widget B1 {{runId}}\",\"priceCents\":1200,\"sku\":\"WIDGET-B1-{{runId}}\"}" }, "url": "{{baseUrl}}/stores/{{storeB1Id}}/products", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminBToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 201', () => pm.response.to.have.status(201));", "const body = pm.response.json(); pm.test('product belongs to Store B1', () => pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeB1Id')));", "pm.collectionVariables.set('productB1Id', body.id);"] } }] },
-        { "name": "4 - Create Product B2", "request": { "method": "POST", "description": "Merchant B admin creates a product in Store B2.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Gadget B2 {{runId}}\",\"priceCents\":750,\"sku\":\"GADGET-B2-{{runId}}\"}" }, "url": "{{baseUrl}}/stores/{{storeB2Id}}/products", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminBToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 201', () => pm.response.to.have.status(201));", "const body = pm.response.json(); pm.test('product belongs to Store B2', () => pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeB2Id')));", "pm.collectionVariables.set('productB2Id', body.id);"] } }] },
-        { "name": "5 - List Products A1", "request": { "method": "GET", "description": "Store A1 staff lists products and their inventory.", "header": [], "url": "{{baseUrl}}/stores/{{storeA1Id}}/products", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('includes the Store A1 product and inventory', () => { const rows = pm.response.json(); pm.expect(rows.some(x => x.id === pm.collectionVariables.get('productA1Id'))).to.eql(true); });"] } }] },
-        { "name": "6 - Get Product A1", "request": { "method": "GET", "description": "Store A1 staff reads its store's product by ID.", "header": [], "url": "{{baseUrl}}/stores/{{storeA1Id}}/products/{{productA1Id}}", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('returns requested product', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('productA1Id')));"] } }] },
-        { "name": "7 - Update Product A1", "request": { "method": "PUT", "description": "Merchant A admin updates the product name in Store A1.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Updated Coffee A1 {{runId}}\"}" }, "url": "{{baseUrl}}/stores/{{storeA1Id}}/products/{{productA1Id}}", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('updates product name', () => pm.expect(pm.response.json().name).to.eql('Updated Coffee A1 ' + pm.collectionVariables.get('runId')));"] } }] }
+        {
+          "name": "Merchant A",
+          "item": [
+            {
+              "name": "Store A1",
+              "item": [
+                {
+                  "name": "Create Product A1",
+                  "request": {
+                    "method": "POST",
+                    "description": "Merchant A admin creates a product in Store A1; inventory starts at zero.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Coffee A1 {{runId}}\",\"priceCents\":250,\"sku\":\"COFFEE-A1-{{runId}}\"}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeA1Id}}/products",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json(); pm.test('product belongs to Store A1', () => pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeA1Id')));",
+                          "pm.collectionVariables.set('productA1Id', body.id);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "List Products A1",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store A1 staff lists products and their inventory.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA1Id}}/products",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffA1Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('includes the Store A1 product and inventory', () => { const rows = pm.response.json(); pm.expect(rows.some(x => x.id === pm.collectionVariables.get('productA1Id'))).to.eql(true); });"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get Product A1",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store A1 staff reads its store's product by ID.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA1Id}}/products/{{productA1Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffA1Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns requested product', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('productA1Id')));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Update Product A1",
+                  "request": {
+                    "method": "PUT",
+                    "description": "Merchant A admin updates the product name in Store A1.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Updated Coffee A1 {{runId}}\"}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeA1Id}}/products/{{productA1Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('updates product name', () => pm.expect(pm.response.json().name).to.eql('Updated Coffee A1 ' + pm.collectionVariables.get('runId')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Store A2",
+              "item": [
+                {
+                  "name": "Create Product A2",
+                  "request": {
+                    "method": "POST",
+                    "description": "Merchant A admin creates a separate product in Store A2.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Tea A2 {{runId}}\",\"priceCents\":175,\"sku\":\"TEA-A2-{{runId}}\"}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeA2Id}}/products",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json(); pm.test('product belongs to Store A2', () => pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeA2Id')));",
+                          "pm.collectionVariables.set('productA2Id', body.id);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "List Store A2 products",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store A2 staff lists products and their inventory.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA2Id}}/products",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffA2Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('includes Tea A2', () => pm.expect(pm.response.json().some(p => p.id === pm.collectionVariables.get('productA2Id'))).to.eql(true));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get Tea A2",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store A2 staff reads its store's product by ID.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA2Id}}/products/{{productA2Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffA2Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns Tea A2', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('productA2Id')));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Update product - Store A2",
+                  "request": {
+                    "method": "PUT",
+                    "description": "Update the product assigned to Store A2.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Updated Tea A2 {{runId}}\"}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeA2Id}}/products/{{productA2Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('updates product name', () => pm.expect(pm.response.json().name).to.eql('Updated Coffee A1 ' + pm.collectionVariables.get('runId')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Merchant B",
+          "item": [
+            {
+              "name": "Store B1",
+              "item": [
+                {
+                  "name": "Create Product B1",
+                  "request": {
+                    "method": "POST",
+                    "description": "Merchant B admin creates a product in Store B1.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Widget B1 {{runId}}\",\"priceCents\":1200,\"sku\":\"WIDGET-B1-{{runId}}\"}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeB1Id}}/products",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json(); pm.test('product belongs to Store B1', () => pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeB1Id')));",
+                          "pm.collectionVariables.set('productB1Id', body.id);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "List Store B1 products",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store B1 staff lists products and their inventory.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB1Id}}/products",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffB1Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('includes Widget B1', () => pm.expect(pm.response.json().some(p => p.id === pm.collectionVariables.get('productB1Id'))).to.eql(true));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get Widget B1",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store B1 staff reads its store's product by ID.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB1Id}}/products/{{productB1Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffB1Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns Widget B1', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('productB1Id')));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Update product - Store B1",
+                  "request": {
+                    "method": "PUT",
+                    "description": "Update the product assigned to Store B1.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Updated Widget B1 {{runId}}\"}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeB1Id}}/products/{{productB1Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('updates product name', () => pm.expect(pm.response.json().name).to.eql('Updated Coffee A1 ' + pm.collectionVariables.get('runId')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Store B2",
+              "item": [
+                {
+                  "name": "Create Product B2",
+                  "request": {
+                    "method": "POST",
+                    "description": "Merchant B admin creates a product in Store B2.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Gadget B2 {{runId}}\",\"priceCents\":750,\"sku\":\"GADGET-B2-{{runId}}\"}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeB2Id}}/products",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json(); pm.test('product belongs to Store B2', () => pm.expect(body.storeId).to.eql(pm.collectionVariables.get('storeB2Id')));",
+                          "pm.collectionVariables.set('productB2Id', body.id);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "List Store B2 products",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store B2 staff lists products and their inventory.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB2Id}}/products",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffB2Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('includes Gadget B2', () => pm.expect(pm.response.json().some(p => p.id === pm.collectionVariables.get('productB2Id'))).to.eql(true));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get Gadget B2",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store B2 staff reads its store's product by ID.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB2Id}}/products/{{productB2Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffB2Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns Gadget B2', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('productB2Id')));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Update product - Store B2",
+                  "request": {
+                    "method": "PUT",
+                    "description": "Update the product assigned to Store B2.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"name\":\"Updated Gadget B2 {{runId}}\"}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeB2Id}}/products/{{productB2Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('updates product name', () => pm.expect(pm.response.json().name).to.eql('Updated Coffee A1 ' + pm.collectionVariables.get('runId')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
       "name": "Inventory",
       "item": [
-        { "name": "1 - Set Store A1 stock", "request": { "method": "PUT", "description": "Merchant A admin receives ten units for the Store A1 product.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"quantity\":10}" }, "url": "{{baseUrl}}/stores/{{storeA1Id}}/inventory/products/{{productA1Id}}", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('stock is set to ten', () => pm.expect(pm.response.json().quantity).to.eql(10));"] } }] },
-        { "name": "2 - Set Store A2 stock", "request": { "method": "PUT", "description": "Merchant A admin receives stock for Store A2 product.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"quantity\":10}" }, "url": "{{baseUrl}}/stores/{{storeA2Id}}/inventory/products/{{productA2Id}}", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('stock is set to ten', () => pm.expect(pm.response.json().quantity).to.eql(10));"] } }] },
-        { "name": "3 - Set Store B1 stock", "request": { "method": "PUT", "description": "Merchant B admin receives stock for Store B1 product.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"quantity\":10}" }, "url": "{{baseUrl}}/stores/{{storeB1Id}}/inventory/products/{{productB1Id}}", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminBToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('stock is set to ten', () => pm.expect(pm.response.json().quantity).to.eql(10));"] } }] },
-        { "name": "4 - Set Store B2 stock", "request": { "method": "PUT", "description": "Merchant B admin receives stock for Store B2 product.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"quantity\":10}" }, "url": "{{baseUrl}}/stores/{{storeB2Id}}/inventory/products/{{productB2Id}}", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminBToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('stock is set to ten', () => pm.expect(pm.response.json().quantity).to.eql(10));"] } }] },
-        { "name": "5 - List Store A1 inventory", "request": { "method": "GET", "description": "Store A1 staff reads inventory; save the initial stock for the sale assertion.", "header": [], "url": "{{baseUrl}}/stores/{{storeA1Id}}/inventory", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "const row = pm.response.json().find(x => x.productId === pm.collectionVariables.get('productA1Id')); pm.test('contains Store A1 product inventory', () => pm.expect(row).to.be.an('object'));", "pm.collectionVariables.set('stockBefore', String(row.quantity));"] } }] }
+        {
+          "name": "Merchant A",
+          "item": [
+            {
+              "name": "Store A1",
+              "item": [
+                {
+                  "name": "Set Store A1 stock",
+                  "request": {
+                    "method": "PUT",
+                    "description": "Merchant A admin receives ten units for the Store A1 product.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"quantity\":10}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeA1Id}}/inventory/products/{{productA1Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('stock is set to ten', () => pm.expect(pm.response.json().quantity).to.eql(10));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "List Store A1 inventory",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store A1 staff reads inventory; save the initial stock for the sale assertion.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA1Id}}/inventory",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffA1Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "const row = pm.response.json().find(x => x.productId === pm.collectionVariables.get('productA1Id')); pm.test('contains Store A1 product inventory', () => pm.expect(row).to.be.an('object'));",
+                          "pm.collectionVariables.set('stockBefore', String(row.quantity));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Store A2",
+              "item": [
+                {
+                  "name": "Set Store A2 stock",
+                  "request": {
+                    "method": "PUT",
+                    "description": "Merchant A admin receives stock for Store A2 product.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"quantity\":10}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeA2Id}}/inventory/products/{{productA2Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('stock is set to ten', () => pm.expect(pm.response.json().quantity).to.eql(10));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "List Store A2 inventory",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store A2 staff reads inventory; save the initial stock for the sale assertion.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA2Id}}/inventory",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffA2Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "const row = pm.response.json().find(i => i.productId === pm.collectionVariables.get('productA2Id')); pm.test('includes inventory for Store A2', () => pm.expect(row).to.be.an('object'));",
+                          "pm.collectionVariables.set('stockBefore', String(row.quantity));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Merchant B",
+          "item": [
+            {
+              "name": "Store B1",
+              "item": [
+                {
+                  "name": "Set Store B1 stock",
+                  "request": {
+                    "method": "PUT",
+                    "description": "Merchant B admin receives stock for Store B1 product.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"quantity\":10}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeB1Id}}/inventory/products/{{productB1Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('stock is set to ten', () => pm.expect(pm.response.json().quantity).to.eql(10));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "List Store B1 inventory",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store B1 staff reads inventory; save the initial stock for the sale assertion.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB1Id}}/inventory",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffB1Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "const row = pm.response.json().find(i => i.productId === pm.collectionVariables.get('productB1Id')); pm.test('includes inventory for Store B1', () => pm.expect(row).to.be.an('object'));",
+                          "pm.collectionVariables.set('stockBefore', String(row.quantity));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Store B2",
+              "item": [
+                {
+                  "name": "Set Store B2 stock",
+                  "request": {
+                    "method": "PUT",
+                    "description": "Merchant B admin receives stock for Store B2 product.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"quantity\":10}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeB2Id}}/inventory/products/{{productB2Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('stock is set to ten', () => pm.expect(pm.response.json().quantity).to.eql(10));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "List Store B2 inventory",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store B2 staff reads inventory; save the initial stock for the sale assertion.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB2Id}}/inventory",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffB2Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "const row = pm.response.json().find(i => i.productId === pm.collectionVariables.get('productB2Id')); pm.test('includes inventory for Store B2', () => pm.expect(row).to.be.an('object'));",
+                          "pm.collectionVariables.set('stockBefore', String(row.quantity));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
       "name": "Sales",
       "item": [
         {
-          "name": "1 - Store A1 staff completes a sale",
-          "request": {
-            "method": "POST",
-            "description": "Store A1 staff sells one unit. The key is sent only as the Idempotency-Key header.",
-            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Idempotency-Key", "value": "{{idempotencyKey}}" }],
-            "body": { "mode": "raw", "raw": "{\"items\":[{\"productId\":\"{{productA1Id}}\",\"quantity\":1}],\"paymentMethod\":\"cash\"}" },
-            "url": "{{baseUrl}}/stores/{{storeA1Id}}/sales",
-            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] }
-          },
-          "event": [
-            { "listen": "prerequest", "script": { "type": "text/javascript", "exec": ["if (!pm.collectionVariables.get('idempotencyKey')) pm.collectionVariables.set('idempotencyKey', pm.variables.replaceIn('{{$guid}}'));"] } },
-            { "listen": "test", "script": { "type": "text/javascript", "exec": [
-              "pm.test('returns 201', () => pm.response.to.have.status(201));",
-              "const body = pm.response.json();",
-              "pm.test('returns completed sale details', () => { pm.expect(body.billNumber).to.be.a('string'); pm.expect(body.total).to.be.a('number'); pm.expect(body.items).to.be.an('array').that.is.not.empty; });",
-              "pm.collectionVariables.set('saleId', body.saleId);",
-              "pm.collectionVariables.set('billNumber', body.billNumber);"
-            ] } }
+          "name": "Merchant A",
+          "item": [
+            {
+              "name": "Store A1",
+              "item": [
+                {
+                  "name": "Create sale - Store A1",
+                  "request": {
+                    "method": "POST",
+                    "description": "Store A1 staff creates a POS sale for its own product.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Idempotency-Key",
+                        "value": "{{idempotencyKey}}"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"items\":[{\"productId\":\"{{productA1Id}}\",\"quantity\":1}],\"paymentMethod\":\"cash\"}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeA1Id}}/sales",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffA1Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "if (!pm.collectionVariables.get('idempotencyKey')) pm.collectionVariables.set('idempotencyKey', pm.variables.replaceIn('{{$guid}}'));"
+                        ]
+                      }
+                    },
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json();",
+                          "pm.test('returns completed sale details', () => { pm.expect(body.billNumber).to.be.a('string'); pm.expect(body.total).to.be.a('number'); pm.expect(body.items).to.be.an('array').that.is.not.empty; });",
+                          "pm.collectionVariables.set('saleId', body.saleId);",
+                          "pm.collectionVariables.set('billNumber', body.billNumber);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "List Store A1 sales",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store A1 staff lists sales for its assigned store.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA1Id}}/sales",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffA1Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('includes the created sale', () => pm.expect(pm.response.json().some(x => x.id === pm.collectionVariables.get('saleId') || x.saleId === pm.collectionVariables.get('saleId'))).to.eql(true));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get Store A1 sale",
+                  "request": {
+                    "method": "GET",
+                    "description": "Read the created sale and verify its bill number.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA1Id}}/sales/{{saleId}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffA1Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns the sale bill number', () => pm.expect(pm.response.json().billNumber).to.eql(pm.collectionVariables.get('billNumber')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Store A2",
+              "item": [
+                {
+                  "name": "Create sale - Store A2",
+                  "request": {
+                    "method": "POST",
+                    "description": "Store A2 staff creates a POS sale for its own product.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Idempotency-Key",
+                        "value": "{{idempotencyKey}}"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"items\":[{\"productId\":\"{{productA2Id}}\",\"quantity\":1}],\"paymentMethod\":\"cash\"}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeA2Id}}/sales",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffA2Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "if (!pm.collectionVariables.get('idempotencyKey')) pm.collectionVariables.set('idempotencyKey', pm.variables.replaceIn('{{$guid}}'));"
+                        ]
+                      }
+                    },
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json();",
+                          "pm.test('returns completed sale details', () => { pm.expect(body.billNumber).to.be.a('string'); pm.expect(body.total).to.be.a('number'); pm.expect(body.items).to.be.an('array').that.is.not.empty; });",
+                          "pm.collectionVariables.set('saleId', body.saleId);",
+                          "pm.collectionVariables.set('billNumber', body.billNumber);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "List Store A2 sales",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store A2 staff lists sales for its assigned store.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA2Id}}/sales",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffA2Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('includes the created sale', () => pm.expect(pm.response.json().some(x => x.id === pm.collectionVariables.get('saleId') || x.saleId === pm.collectionVariables.get('saleId'))).to.eql(true));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get Store A2 sale",
+                  "request": {
+                    "method": "GET",
+                    "description": "Read the created sale and verify its bill number.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA2Id}}/sales/{{saleId}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffA2Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns the sale bill number', () => pm.expect(pm.response.json().billNumber).to.eql(pm.collectionVariables.get('billNumber')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
           ]
         },
-        { "name": "2 - List Store A1 sales", "request": { "method": "GET", "description": "Store A1 staff lists sales for its assigned store.", "header": [], "url": "{{baseUrl}}/stores/{{storeA1Id}}/sales", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('includes the created sale', () => pm.expect(pm.response.json().some(x => x.id === pm.collectionVariables.get('saleId') || x.saleId === pm.collectionVariables.get('saleId'))).to.eql(true));"] } }] },
-        { "name": "3 - Get created sale", "request": { "method": "GET", "description": "Read the created sale and verify its bill number.", "header": [], "url": "{{baseUrl}}/stores/{{storeA1Id}}/sales/{{saleId}}", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('returns the sale bill number', () => pm.expect(pm.response.json().billNumber).to.eql(pm.collectionVariables.get('billNumber')));"] } }] }
+        {
+          "name": "Merchant B",
+          "item": [
+            {
+              "name": "Store B1",
+              "item": [
+                {
+                  "name": "Create sale - Store B1",
+                  "request": {
+                    "method": "POST",
+                    "description": "Store B1 staff creates a POS sale for its own product.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Idempotency-Key",
+                        "value": "{{idempotencyKey}}"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"items\":[{\"productId\":\"{{productB1Id}}\",\"quantity\":1}],\"paymentMethod\":\"cash\"}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeB1Id}}/sales",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffB1Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "if (!pm.collectionVariables.get('idempotencyKey')) pm.collectionVariables.set('idempotencyKey', pm.variables.replaceIn('{{$guid}}'));"
+                        ]
+                      }
+                    },
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json();",
+                          "pm.test('returns completed sale details', () => { pm.expect(body.billNumber).to.be.a('string'); pm.expect(body.total).to.be.a('number'); pm.expect(body.items).to.be.an('array').that.is.not.empty; });",
+                          "pm.collectionVariables.set('saleId', body.saleId);",
+                          "pm.collectionVariables.set('billNumber', body.billNumber);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "List Store B1 sales",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store B1 staff lists sales for its assigned store.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB1Id}}/sales",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffB1Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('includes the created sale', () => pm.expect(pm.response.json().some(x => x.id === pm.collectionVariables.get('saleId') || x.saleId === pm.collectionVariables.get('saleId'))).to.eql(true));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get Store B1 sale",
+                  "request": {
+                    "method": "GET",
+                    "description": "Read the created sale and verify its bill number.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB1Id}}/sales/{{saleId}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffB1Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns the sale bill number', () => pm.expect(pm.response.json().billNumber).to.eql(pm.collectionVariables.get('billNumber')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Store B2",
+              "item": [
+                {
+                  "name": "Create sale - Store B2",
+                  "request": {
+                    "method": "POST",
+                    "description": "Store B2 staff creates a POS sale for its own product.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Idempotency-Key",
+                        "value": "{{idempotencyKey}}"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"items\":[{\"productId\":\"{{productB2Id}}\",\"quantity\":1}],\"paymentMethod\":\"cash\"}"
+                    },
+                    "url": "{{baseUrl}}/stores/{{storeB2Id}}/sales",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffB2Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "if (!pm.collectionVariables.get('idempotencyKey')) pm.collectionVariables.set('idempotencyKey', pm.variables.replaceIn('{{$guid}}'));"
+                        ]
+                      }
+                    },
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 201', () => pm.response.to.have.status(201));",
+                          "const body = pm.response.json();",
+                          "pm.test('returns completed sale details', () => { pm.expect(body.billNumber).to.be.a('string'); pm.expect(body.total).to.be.a('number'); pm.expect(body.items).to.be.an('array').that.is.not.empty; });",
+                          "pm.collectionVariables.set('saleId', body.saleId);",
+                          "pm.collectionVariables.set('billNumber', body.billNumber);"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "List Store B2 sales",
+                  "request": {
+                    "method": "GET",
+                    "description": "Store B2 staff lists sales for its assigned store.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB2Id}}/sales",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffB2Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('includes the created sale', () => pm.expect(pm.response.json().some(x => x.id === pm.collectionVariables.get('saleId') || x.saleId === pm.collectionVariables.get('saleId'))).to.eql(true));"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Get Store B2 sale",
+                  "request": {
+                    "method": "GET",
+                    "description": "Read the created sale and verify its bill number.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB2Id}}/sales/{{saleId}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{staffB2Token}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                          "pm.test('returns the sale bill number', () => pm.expect(pm.response.json().billNumber).to.eql(pm.collectionVariables.get('billNumber')));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Product archive",
+      "item": [
+        {
+          "name": "Merchant A",
+          "item": [
+            {
+              "name": "Store A1",
+              "item": [
+                {
+                  "name": "Deactivate product - Store A1",
+                  "request": {
+                    "method": "DELETE",
+                    "description": "Deactivate the product in Store A1. Run this after Sales so the product remains available for the sale requests.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA1Id}}/products/{{productA1Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Store A2",
+              "item": [
+                {
+                  "name": "Deactivate product - Store A2",
+                  "request": {
+                    "method": "DELETE",
+                    "description": "Deactivate the product in Store A2. Run this after Sales so the product remains available for the sale requests.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeA2Id}}/products/{{productA2Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminAToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Merchant B",
+          "item": [
+            {
+              "name": "Store B1",
+              "item": [
+                {
+                  "name": "Deactivate product - Store B1",
+                  "request": {
+                    "method": "DELETE",
+                    "description": "Deactivate the product in Store B1. Run this after Sales so the product remains available for the sale requests.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB1Id}}/products/{{productB1Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Store B2",
+              "item": [
+                {
+                  "name": "Deactivate product - Store B2",
+                  "request": {
+                    "method": "DELETE",
+                    "description": "Deactivate the product in Store B2. Run this after Sales so the product remains available for the sale requests.",
+                    "header": [],
+                    "url": "{{baseUrl}}/stores/{{storeB2Id}}/products/{{productB2Id}}",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{merchantAdminBToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                          "pm.test('returns 200', () => pm.response.to.have.status(200));"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
       "name": "Health",
       "item": [
-        { "name": "Application health", "request": { "method": "GET", "description": "Check overall service status.", "header": [], "url": "{{baseUrl}}/health" }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('returns a timestamp', () => pm.expect(pm.response.json().timestamp).to.be.a('string'));"] } }] },
-        { "name": "Database health", "request": { "method": "GET", "description": "Check PostgreSQL connectivity.", "header": [], "url": "{{baseUrl}}/health/database" }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('returns database status', () => pm.expect(pm.response.json().database.status).to.be.a('string'));"] } }] },
-        { "name": "Cache health", "request": { "method": "GET", "description": "Check cache connectivity/status.", "header": [], "url": "{{baseUrl}}/health/cache" }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('returns cache status', () => pm.expect(pm.response.json().cache.status).to.be.a('string'));"] } }] }
-      ]
-    },
-    {
-      "name": "Scenarios",
-      "item": [
-        { "name": "1 - Stock decreased after committed sale", "request": { "method": "GET", "description": "Verify the successful POS sale reduced Store A1 inventory by one.", "header": [], "url": "{{baseUrl}}/stores/{{storeA1Id}}/inventory", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "const row = pm.response.json().find(x => x.productId === pm.collectionVariables.get('productA1Id'));", "pm.test('stock decreased by one', () => pm.expect(Number(row.quantity)).to.eql(Number(pm.collectionVariables.get('stockBefore')) - 1));"] } }] },
-        { "name": "2 - Replay same key and body", "request": { "method": "POST", "description": "Replay the successful request with the same header key and body; it must return the same bill number.", "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Idempotency-Key", "value": "{{idempotencyKey}}" }], "body": { "mode": "raw", "raw": "{\"items\":[{\"productId\":\"{{productA1Id}}\",\"quantity\":1}],\"paymentMethod\":\"cash\"}" }, "url": "{{baseUrl}}/stores/{{storeA1Id}}/sales", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 201', () => pm.response.to.have.status(201));", "const body = pm.response.json(); pm.test('reuses bill number', () => pm.expect(body.billNumber).to.eql(pm.collectionVariables.get('billNumber')));"] } }] },
-        { "name": "3 - Same key with different body", "request": { "method": "POST", "description": "Reusing the completed sale key with a different quantity must return 422.", "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Idempotency-Key", "value": "{{idempotencyKey}}" }], "body": { "mode": "raw", "raw": "{\"items\":[{\"productId\":\"{{productA1Id}}\",\"quantity\":2}],\"paymentMethod\":\"cash\"}" }, "url": "{{baseUrl}}/stores/{{storeA1Id}}/sales", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 422', () => pm.response.to.have.status(422));"] } }] },
-        { "name": "4 - Missing Idempotency-Key", "request": { "method": "POST", "description": "Omit the required header; the request must return 400.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"items\":[{\"productId\":\"{{productA1Id}}\",\"quantity\":1}],\"paymentMethod\":\"cash\"}" }, "url": "{{baseUrl}}/stores/{{storeA1Id}}/sales", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 400', () => pm.response.to.have.status(400));"] } }] },
-        { "name": "5 - Quantity above available stock", "request": { "method": "POST", "description": "Request more stock than exists; expect a client error and no sale.", "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Idempotency-Key", "value": "oversell-{{runId}}" }], "body": { "mode": "raw", "raw": "{\"items\":[{\"productId\":\"{{productA1Id}}\",\"quantity\":99999}],\"paymentMethod\":\"cash\"}" }, "url": "{{baseUrl}}/stores/{{storeA1Id}}/sales", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns a 4xx status', () => pm.expect(pm.response.code).to.be.within(400, 499));"] } }] },
-        { "name": "6 - Client-sent price rejected", "request": { "method": "POST", "description": "Send an unsupported item price field; validation must reject the request with 400.", "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Idempotency-Key", "value": "client-price-{{runId}}" }], "body": { "mode": "raw", "raw": "{\"items\":[{\"productId\":\"{{productA1Id}}\",\"quantity\":1,\"priceCents\":1}],\"paymentMethod\":\"cash\"}" }, "url": "{{baseUrl}}/stores/{{storeA1Id}}/sales", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 400', () => pm.response.to.have.status(400));"] } }] },
-        { "name": "7 - Store A1 staff cannot access Store A2", "request": { "method": "GET", "description": "Staff A1 has one assigned store; requesting Store A2 must return 404.", "header": [], "url": "{{baseUrl}}/stores/{{storeA2Id}}/products", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 404', () => pm.response.to.have.status(404));"] } }] },
-        { "name": "8 - Merchant B cannot access Merchant A product", "request": { "method": "GET", "description": "Merchant B admin cannot read a product from Merchant A.", "header": [], "url": "{{baseUrl}}/stores/{{storeA1Id}}/products/{{productA1Id}}", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminBToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 404', () => pm.response.to.have.status(404));"] } }] },
-        { "name": "9 - Product ID swap is rejected", "request": { "method": "GET", "description": "A valid Store A2 product ID used under Store A1 must return 404.", "header": [], "url": "{{baseUrl}}/stores/{{storeA1Id}}/products/{{productA2Id}}", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 404', () => pm.response.to.have.status(404));"] } }] },
-        { "name": "10 - Store staff cannot create users", "request": { "method": "POST", "description": "A staff token cannot use the merchant-admin-only user management endpoint.", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"name\":\"Extra Staff\",\"email\":\"extra-{{runId}}@example.com\",\"password\":\"{{flowPassword}}\",\"storeId\":\"{{storeA1Id}}\"}" }, "url": "{{baseUrl}}/users", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 403', () => pm.response.to.have.status(403));"] } }] },
-        { "name": "11 - No token is rejected", "request": { "method": "GET", "description": "A protected store route without a bearer token must return 401.", "header": [], "url": "{{baseUrl}}/stores/{{storeA1Id}}/products", "auth": { "type": "noauth" } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 401', () => pm.response.to.have.status(401));"] } }] },
-        { "name": "12 - Payment failure rolls back sale and stock", "request": { "method": "POST", "description": "To run this scenario, set PAYMENT_FAIL_RATE=1 in the server .env and restart the API before sending. The payment failure should return 400 and roll back both the sale and stock decrement; restore the rate afterward.", "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Idempotency-Key", "value": "payment-failure-{{runId}}" }], "body": { "mode": "raw", "raw": "{\"items\":[{\"productId\":\"{{productA1Id}}\",\"quantity\":1}],\"paymentMethod\":\"cash\"}" }, "url": "{{baseUrl}}/stores/{{storeA1Id}}/sales", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{staffA1Token}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 400 when payment failure is enabled', () => pm.response.to.have.status(400));"] } }] },
-        { "name": "13 - Deactivate Store A2 product", "request": { "method": "DELETE", "description": "Merchant A admin deactivates the Store A2 product after the cross-store ID-swap scenario.", "header": [], "url": "{{baseUrl}}/stores/{{storeA2Id}}/products/{{productA2Id}}", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{merchantAdminAToken}}", "type": "string" }] } }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));"] } }] }
+        {
+          "name": "Application health",
+          "request": {
+            "method": "GET",
+            "description": "Check overall service status.",
+            "header": [],
+            "url": "{{baseUrl}}/health"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                  "pm.test('returns a timestamp', () => pm.expect(pm.response.json().timestamp).to.be.a('string'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Database health",
+          "request": {
+            "method": "GET",
+            "description": "Check PostgreSQL connectivity.",
+            "header": [],
+            "url": "{{baseUrl}}/health/database"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                  "pm.test('returns database status', () => pm.expect(pm.response.json().database.status).to.be.a('string'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cache health",
+          "request": {
+            "method": "GET",
+            "description": "Check cache connectivity/status.",
+            "header": [],
+            "url": "{{baseUrl}}/health/cache"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('returns 200', () => pm.response.to.have.status(200));",
+                  "pm.test('returns cache status', () => pm.expect(pm.response.json().cache.status).to.be.a('string'));"
+                ]
+              }
+            }
+          ]
+        }
       ]
     }
   ]

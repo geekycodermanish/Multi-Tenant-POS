@@ -1,5 +1,5 @@
 /**
- * Seed script — creates two merchants, their stores, admin/staff users,
+ * Seed script — creates two sample merchants, their stores, admin/staff users,
  * products, and inventory so you can test the API immediately.
  *
  * Run with:  npm run seed
@@ -29,6 +29,7 @@ const sequelize = new Sequelize({
 });
 
 const hash = (pw: string) => bcrypt.hash(pw, 10);
+const demoPassword = 'password321';
 
 async function seed() {
   const platformAdminEmail = process.env.PLATFORM_ADMIN_EMAIL?.trim();
@@ -60,7 +61,7 @@ async function seed() {
   }
 
   const existingDemoMerchant = await Merchant.findOne({
-    where: { name: 'Merchant A' },
+    where: { name: 'Zodio' },
   });
   if (existingDemoMerchant) {
     console.log('Platform admin ready; demo merchant fixtures already exist, skipping them.');
@@ -68,120 +69,125 @@ async function seed() {
     return;
   }
 
-  // ── Merchant A ────────────────────────────────────────────────────────────
-  const merchantA = await Merchant.create({
-    name: 'Merchant A',
-    email: 'merchantA@example.com',
+  // ── Zodio ─────────────────────────────────────────────────────────────────
+  const zodio = await Merchant.create({
+    name: 'Zodio',
+    email: 'contact@zodio.example.com',
   } as any);
 
-  const storeA1 = await Store.create({
-    name: 'Store A1',
-    address: '123 Main St',
-    merchantId: merchantA.id,
-  } as any);
-
-  const storeA2 = await Store.create({
-    name: 'Store A2',
-    address: '456 Oak Ave',
-    merchantId: merchantA.id,
+  const zodioSector86 = await Store.create({
+    name: 'Zodio Sector 86',
+    address: 'Sector 86, Noida',
+    merchantId: zodio.id,
   } as any);
 
   await User.create({
-    name: 'Admin A',
-    email: 'admin.a@example.com',
-    password: await hash('password123'),
+    name: 'Zodio Admin',
+    email: 'admin@zodio.example.com',
+    password: await hash(demoPassword),
     role: UserRole.MERCHANT_ADMIN,
-    merchantId: merchantA.id,
+    merchantId: zodio.id,
   } as any);
 
   await User.create({
-    name: 'Staff A1',
-    email: 'staff.a1@example.com',
-    password: await hash('password123'),
+    name: 'Rahul',
+    email: 'rahul@zodio.example.com',
+    password: await hash(demoPassword),
     role: UserRole.STORE_STAFF,
-    merchantId: merchantA.id,
-    storeId: storeA1.id,
+    merchantId: zodio.id,
+    storeId: zodioSector86.id,
   } as any);
 
-  // Products for Store A1
+  await User.create({
+    name: 'Manish',
+    email: 'manish@zodio.example.com',
+    password: await hash(demoPassword),
+    role: UserRole.STORE_STAFF,
+    merchantId: zodio.id,
+    storeId: zodioSector86.id,
+  } as any);
+
+  // Products for Zodio Sector 86
   const productsData = [
-    { name: 'Coffee',         priceCents: 250,  stock: 100 },
-    { name: 'Tea',            priceCents: 150,  stock: 50  },
-    { name: 'Sandwich',       priceCents: 850,  stock: 30  },
-    { name: 'Low Stock Item', priceCents: 500,  stock: 2   },
+    { name: 'Cotton T-Shirt', priceCents: 49900, stock: 100 },
+    { name: 'Casual Shirt', priceCents: 89900, stock: 50 },
+    { name: 'Denim Jeans', priceCents: 129900, stock: 30 },
+    { name: 'Low Stock Kurta', priceCents: 79900, stock: 2 },
   ];
 
   for (const p of productsData) {
     const product = await Product.create({
       name: p.name,
       priceCents: p.priceCents,
-      storeId: storeA1.id,
+      storeId: zodioSector86.id,
     } as any);
 
     await Inventory.create({
       productId: product.id,
-      storeId: storeA1.id,
+      storeId: zodioSector86.id,
       quantity: p.stock,
     } as any);
   }
 
-  // ── Merchant B ────────────────────────────────────────────────────────────
-  const merchantB = await Merchant.create({
-    name: 'Merchant B',
-    email: 'merchantB@example.com',
+  // ── Urban Pantry ──────────────────────────────────────────────────────────
+  const urbanPantry = await Merchant.create({
+    name: 'Urban Pantry',
+    email: 'contact@urbanpantry.example.com',
   } as any);
 
-  const storeB1 = await Store.create({
-    name: 'Store B1',
-    address: '789 Pine Rd',
-    merchantId: merchantB.id,
+  const urbanPantryNoida = await Store.create({
+    name: 'Urban Pantry Noida',
+    address: 'Sector 18, Noida',
+    merchantId: urbanPantry.id,
   } as any);
 
   await User.create({
-    name: 'Admin B',
-    email: 'admin.b@example.com',
-    password: await hash('password123'),
+    name: 'Urban Pantry Admin',
+    email: 'admin@urbanpantry.example.com',
+    password: await hash(demoPassword),
     role: UserRole.MERCHANT_ADMIN,
-    merchantId: merchantB.id,
+    merchantId: urbanPantry.id,
   } as any);
 
   await User.create({
-    name: 'Staff B1',
-    email: 'staff.b1@example.com',
-    password: await hash('password123'),
+    name: 'John',
+    email: 'john@urbanpantry.example.com',
+    password: await hash(demoPassword),
     role: UserRole.STORE_STAFF,
-    merchantId: merchantB.id,
-    storeId: storeB1.id,
+    merchantId: urbanPantry.id,
+    storeId: urbanPantryNoida.id,
   } as any);
 
   const productB = await Product.create({
-    name: 'Widget',
-    priceCents: 1200,
-    storeId: storeB1.id,
+    name: 'Organic Rice 5kg',
+    priceCents: 64900,
+    storeId: urbanPantryNoida.id,
   } as any);
 
   await Inventory.create({
     productId: productB.id,
-    storeId: storeB1.id,
+    storeId: urbanPantryNoida.id,
     quantity: 20,
   } as any);
 
   console.log(`
 Seed complete!
 
-Merchant A
-  Admin:  admin.a@example.com  / password123
-  Staff:  staff.a1@example.com / password123
-  Store A1 ID: ${storeA1.id}
-  Store A2 ID: ${storeA2.id}
+Zodio
+  Admin:  admin@zodio.example.com / ${demoPassword}
+  Staff:  rahul@zodio.example.com / ${demoPassword}
+          manish@zodio.example.com / ${demoPassword}
+  Store:  Zodio Sector 86 (ID: ${zodioSector86.id})
 
-Merchant B
-  Admin:  admin.b@example.com  / password123
-  Staff:  staff.b1@example.com / password123
-  Store B1 ID: ${storeB1.id}
+Urban Pantry
+  Admin:  admin@urbanpantry.example.com / ${demoPassword}
+  Staff:  john@urbanpantry.example.com / ${demoPassword}
+  Store:  Urban Pantry Noida (ID: ${urbanPantryNoida.id})
 
 Platform admin
   Admin: ${platformAdminEmail} / password supplied through PLATFORM_ADMIN_PASSWORD
+
+Demo merchant and staff password: ${demoPassword}
 `);
 
   await sequelize.close();
